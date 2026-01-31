@@ -1,26 +1,48 @@
-[gd_scene load_steps=9 format=3 uid="uid://piuow3foau7w"]
+[gd_scene load_steps=11 format=3 uid="uid://piuow3foau7w"]
 
 [ext_resource type="Script" uid="uid://dkqoof37cqsam" path="res://title_screen.gd" id="1_ig5kc"]
 [ext_resource type="Texture2D" uid="uid://dr77xchy8ul0r" path="res://art/temp/title_red.png" id="2_05l2w"]
-[ext_resource type="Shader" uid="uid://c3p0gmtki8c11" path="res://mix_below.gdshader" id="2_hafda"]
+[ext_resource type="Shader" uid="uid://c3p0gmtki8c11" path="res://shaders/mix_below.gdshader" id="2_hafda"]
 [ext_resource type="Texture2D" uid="uid://dp2n4bf4gylhn" path="res://art/temp/title_blue.png" id="3_hafda"]
-[ext_resource type="Shader" uid="uid://cagnj85rvrn5p" path="res://mix_above.gdshader" id="4_hafda"]
+[ext_resource type="Shader" uid="uid://ba827y65qbgu1" path="res://shaders/mix_above.gdshader" id="6_tpml5"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpml5"]
-shader = ExtResource("2_hafda")
+[sub_resource type="Shader" id="Shader_hafda"]
+code = "shader_type canvas_item;
+render_mode blend_premul_alpha;
+uniform sampler2D below_texture;
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+	vec4 bottom_color = texture(below_texture, UV);
+	vec4 top_color_raw = texture(TEXTURE, UV);
+	vec4 top_color_premul = vec4(top_color_raw.rgb * top_color_raw.a, top_color_raw.a);
+	//COLOR = mix(bottom_color, top_color_premul, 0.5);
+	vec4 mixed_color;
+    mixed_color.rgb = mix(bottom_color, top_color_premul, 0.5).rgb;
+    // \"Screen\" formula (rather than simple sum) ensures we don't end up with alpha > 1.0:
+	mixed_color.a = 1.0 - (1.0 - top_color_premul.a) * (1.0 - bottom_color.a);
+	COLOR = mixed_color;
+}"
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hafda"]
 viewport_path = NodePath("Mix Viewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jqemp"]
 resource_local_to_scene = true
-shader = ExtResource("4_hafda")
+shader = SubResource("Shader_hafda")
 shader_parameter/below_texture = SubResource("ViewportTexture_hafda")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpml5"]
+shader = ExtResource("2_hafda")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
+shader = ExtResource("6_tpml5")
 
 [node name="TitleScreen" type="CanvasLayer"]
 script = ExtResource("1_ig5kc")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,21 +50,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.30336, 0.30240002, 0.36, 1)
 
-[node name="Mix Viewport" type="SubViewport" parent="."]
-unique_name_in_owner = true
-transparent_bg = true
-size = Vector2i(1920, 1080)
-
-[node name="Beak & Claw" type="TextureRect" parent="Mix Viewport"]
-material = SubResource("ShaderMaterial_tpml5")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_hafda")
-
 [node name="Fang & Talon" type="TextureRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_jqemp")
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,11 +60,34 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_05l2w")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Beak & Claw" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+material = SubResource("ShaderMaterial_tpml5")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_hafda")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="SubViewportContainer/SubViewport"]
+visible = false
+copy_mode = 2
+
+[node name="Fang & Talon" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+material = SubResource("ShaderMaterial_hafda")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_05l2w")

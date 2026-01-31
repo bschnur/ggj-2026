@@ -1,5 +1,5 @@
 shader_type canvas_item;
-render_mode blend_disabled, unshaded;
+render_mode blend_disabled;
 
 void fragment() {
 	// Called for every pixel the material is visible on.
