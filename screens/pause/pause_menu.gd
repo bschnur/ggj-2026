@@ -65,7 +65,8 @@ func navigate(submenu: Node) -> void:
 	submenu.show()
 
 func unpause() -> void:
-	hide()
+	init_visibility()
+	current_submenu = main_menu
 	get_tree().paused = false
 
 func _on_resume_button_pressed() -> void:
@@ -100,7 +101,7 @@ func apply_settings() -> void:
 
 signal went_to_title
 func _on_quit_to_title_button_pressed() -> void:
-	init_visibility()
+	unpause()
 	went_to_title.emit()
 
 func _on_quit_to_desktop_button_pressed() -> void:
