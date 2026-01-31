@@ -1,0 +1,203 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgtbu5l52m5gk"]
+
+[ext_resource type="Script" uid="uid://dgxiawqvbo7ac" path="res://pause_menu.gd" id="1_hdmo1"]
+[ext_resource type="Theme" uid="uid://cngg0a3aok74u" path="res://main.tres" id="2_nwcfo"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_hdmo1")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_nwcfo")
+
+[node name="MainMenu" type="VBoxContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/MainMenu"]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="CenterContainer/MainMenu"]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/MainMenu"]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
+[node name="OptionsMenu" type="VBoxContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="DisplaySection" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="DisplayLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 18
+text = "Display settings"
+horizontal_alignment = 1
+
+[node name="DisplaySettings" type="VBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 40
+
+[node name="Resolution" type="HBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ResolutionLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
+layout_mode = 2
+text = "Screen resolution: "
+
+[node name="ResolutionDropdown" type="OptionButton" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+
+[node name="AudioSection" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AudioLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 18
+text = "Volume settings"
+horizontal_alignment = 1
+
+[node name="AudioSettings" type="VBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Music" type="HBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Music"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Music"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+value = 50.0
+rounded = true
+scrollable = false
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 2
+
+[node name="Sounds" type="HBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings"]
+layout_mode = 2
+
+[node name="SoundsLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Sounds"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Sounds"
+
+[node name="SoundsSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Sounds"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+value = 50.0
+rounded = true
+scrollable = false
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 2
+
+[node name="Voice" type="HBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings"]
+layout_mode = 2
+
+[node name="VoiceLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Voice"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Voice"
+
+[node name="VoiceSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Voice"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+value = 50.0
+rounded = true
+scrollable = false
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 2
+
+[node name="OptionsConfirmCancel" type="HBoxContainer" parent="CenterContainer/OptionsMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 40
+
+[node name="OptionsCancel" type="Button" parent="CenterContainer/OptionsMenu/OptionsConfirmCancel"]
+custom_minimum_size = Vector2(240, 40)
+layout_mode = 2
+text = "Cancel and discard changes"
+
+[node name="OptionsConfirm" type="Button" parent="CenterContainer/OptionsMenu/OptionsConfirmCancel"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+text = "Accept changes"
+
+[node name="QuitMenu" type="VBoxContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="QuitToTitleButton" type="Button" parent="CenterContainer/QuitMenu"]
+layout_mode = 2
+text = "Quit to Title"
+
+[node name="QuitToDesktopButton" type="Button" parent="CenterContainer/QuitMenu"]
+layout_mode = 2
+text = "Quit to Desktop"
+
+[node name="QuitBackButton" type="Button" parent="CenterContainer/QuitMenu"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="CenterContainer/MainMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MainMenu/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CenterContainer/OptionsMenu/OptionsConfirmCancel/OptionsCancel" to="." method="_on_options_cancel_pressed"]
+[connection signal="pressed" from="CenterContainer/OptionsMenu/OptionsConfirmCancel/OptionsConfirm" to="." method="_on_options_confirm_pressed"]
+[connection signal="pressed" from="CenterContainer/QuitMenu/QuitToTitleButton" to="." method="_on_quit_to_title_button_pressed"]
+[connection signal="pressed" from="CenterContainer/QuitMenu/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]
+[connection signal="pressed" from="CenterContainer/QuitMenu/QuitBackButton" to="." method="_on_quit_back_button_pressed"]
