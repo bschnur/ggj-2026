@@ -56,7 +56,7 @@ alignment = 1
 
 [node name="DisplaySection" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 40
 
 [node name="DisplayLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection"]
 layout_mode = 2
@@ -79,26 +79,57 @@ layout_mode = 2
 text = "Screen resolution: "
 
 [node name="ResolutionDropdown" type="OptionButton" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
+unique_name_in_owner = true
 layout_mode = 2
-selected = 0
-item_count = 1
-popup/item_0/text = "1920x1080"
-popup/item_0/id = 0
+
+[node name="Fullscreen" type="HBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FullscreenLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
+layout_mode = 2
+text = "Screen resolution: "
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="AudioSection" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 40
 
 [node name="AudioLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 18
-text = "Volume settings"
+text = "Audio settings"
 horizontal_alignment = 1
 
 [node name="AudioSettings" type="VBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection"]
 layout_mode = 2
 theme_override_constants/separation = 40
+
+[node name="Master" type="HBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Master"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Main Volume"
+
+[node name="MasterSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Master"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.5
+scrollable = false
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 2
 
 [node name="Music" type="HBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings"]
 layout_mode = 2
@@ -106,15 +137,18 @@ layout_mode = 2
 [node name="MusicLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Music"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 24
 text = "Music"
 
 [node name="MusicSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Music"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
-value = 50.0
-rounded = true
+max_value = 1.0
+step = 0.01
+value = 0.5
 scrollable = false
 tick_count = 11
 ticks_on_borders = true
@@ -126,15 +160,18 @@ layout_mode = 2
 [node name="SoundsLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Sounds"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 24
 text = "Sounds"
 
 [node name="SoundsSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Sounds"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
-value = 50.0
-rounded = true
+max_value = 1.0
+step = 0.01
+value = 0.5
 scrollable = false
 tick_count = 11
 ticks_on_borders = true
@@ -146,15 +183,18 @@ layout_mode = 2
 [node name="VoiceLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Voice"]
 layout_mode = 2
 size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 24
 text = "Voice"
 
 [node name="VoiceSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Voice"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
-value = 50.0
-rounded = true
+max_value = 1.0
+step = 0.01
+value = 0.5
 scrollable = false
 tick_count = 11
 ticks_on_borders = true
