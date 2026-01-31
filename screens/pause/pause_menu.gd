@@ -1,6 +1,10 @@
 extends CanvasLayer
 
-@onready var current_submenu := %MainMenu
+@onready var main_menu := %MainMenu
+@onready var options_menu := %OptionsMenu
+@onready var quit_menu := %QuitMenu
+
+@onready var current_submenu := main_menu
 
 var screen_resolutions: Dictionary[String, int] = {
 	"3840x2160": 2160,
@@ -24,9 +28,9 @@ func _ready() -> void:
 
 func init_visibility() -> void:
 	hide()
-	%MainMenu.show()
-	%OptionsMenu.hide()
-	%QuitMenu.hide()
+	main_menu.show()
+	options_menu.hide()
+	quit_menu.hide()
 
 func init_resolution_values() -> void:
 	for res_name in screen_resolutions:
@@ -50,10 +54,10 @@ func init_settings_values() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
-		if current_submenu == %MainMenu:
+		if current_submenu == main_menu:
 			unpause()
-		elif current_submenu in [%OptionsMenu, %QuitMenu]:
-			navigate(%MainMenu)
+		elif current_submenu in [options_menu, quit_menu]:
+			navigate(main_menu)
 
 func navigate(submenu: Node) -> void:
 	current_submenu.hide()
@@ -68,19 +72,19 @@ func _on_resume_button_pressed() -> void:
 	unpause()
 
 func _on_options_button_pressed() -> void:
-	navigate(%OptionsMenu)
+	navigate(options_menu)
 
 func _on_quit_button_pressed() -> void:
-	navigate(%QuitMenu)
+	navigate(quit_menu)
 
 func _on_options_cancel_pressed() -> void:
 	# Todo: prompt user whether to discard changes, if there are any
-	navigate(%MainMenu)
+	navigate(main_menu)
 
 func _on_options_confirm_pressed() -> void:
 	apply_settings()
 	# Todo: confirmation sound.
-	navigate(%MainMenu)
+	navigate(main_menu)
 
 func apply_settings() -> void:
 	Settings.volume_master = %MasterSlider.value
@@ -94,11 +98,13 @@ func apply_settings() -> void:
 	
 	Settings.save_settings()
 
+signal went_to_title
 func _on_quit_to_title_button_pressed() -> void:
-	pass # Todo: go to title
+	init_visibility()
+	went_to_title.emit()
 
 func _on_quit_to_desktop_button_pressed() -> void:
 	get_tree().quit()
 
 func _on_quit_back_button_pressed() -> void:
-	navigate(%MainMenu)
+	navigate(main_menu)

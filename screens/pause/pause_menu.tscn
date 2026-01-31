@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgtbu5l52m5gk"]
 
-[ext_resource type="Script" uid="uid://dgxiawqvbo7ac" path="res://pause_menu.gd" id="1_hdmo1"]
-[ext_resource type="Theme" uid="uid://cngg0a3aok74u" path="res://main.tres" id="2_nwcfo"]
+[ext_resource type="Script" uid="uid://dgxiawqvbo7ac" path="res://screens/pause/pause_menu.gd" id="1_hdmo1"]
+[ext_resource type="Theme" uid="uid://cngg0a3aok74u" path="res://themes/main.tres" id="2_nwcfo"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 script = ExtResource("1_hdmo1")

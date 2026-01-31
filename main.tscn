@@ -1,20 +1,27 @@
 [gd_scene load_steps=5 format=3 uid="uid://bp1h4q7voqhfk"]
 
-[ext_resource type="PackedScene" uid="uid://dwanxtmbqk1ym" path="res://hud.tscn" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://plt40tcd7666" path="res://main.gd" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://cgtbu5l52m5gk" path="res://pause_menu.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://piuow3foau7w" path="res://title_screen.tscn" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://plt40tcd7666" path="res://main.gd" id="1_tubg1"]
+[ext_resource type="PackedScene" uid="uid://dwanxtmbqk1ym" path="res://screens/hud/hud.tscn" id="2_q8oy7"]
+[ext_resource type="PackedScene" uid="uid://cgtbu5l52m5gk" path="res://screens/pause/pause_menu.tscn" id="3_qne8x"]
+[ext_resource type="PackedScene" uid="uid://piuow3foau7w" path="res://screens/title/title_screen.tscn" id="4_4nmqe"]
 
 [node name="Main" type="Node"]
-script = ExtResource("1_h2yge")
+script = ExtResource("1_tubg1")
 
 [node name="World" type="Node2D" parent="."]
 
+[node name="Camera2D" type="Camera2D" parent="World"]
+offset = Vector2(960, 540)
+
 [node name="UI Layer" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="UI Layer" instance=ExtResource("1_0xm2m")]
+[node name="HUD" parent="UI Layer" instance=ExtResource("2_q8oy7")]
 
-[node name="PauseMenu" parent="UI Layer" instance=ExtResource("2_h2yge")]
+[node name="PauseMenu" parent="UI Layer" instance=ExtResource("3_qne8x")]
 unique_name_in_owner = true
 
-[node name="TitleScreen" parent="." instance=ExtResource("4_1bvp3")]
+[node name="TitleScreen" parent="." instance=ExtResource("4_4nmqe")]
+unique_name_in_owner = true
+
+[connection signal="went_to_title" from="UI Layer/PauseMenu" to="." method="_on_pause_menu_went_to_title"]
+[connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]
