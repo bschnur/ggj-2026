@@ -3,10 +3,11 @@ extends CanvasLayer
 #func _ready() -> void:
 	#pass
 
+# Commented out while testing color filter cursor.
 func _unhandled_input(event: InputEvent) -> void:
-	if not event is InputEventMouseMotion and not event is InputEventJoypadMotion:
+	if event.is_action_pressed("dismiss_title_screen"):
 		leave_title()
-	get_viewport().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 signal dismissed
 

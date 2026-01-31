@@ -1,12 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bp1h4q7voqhfk"]
+[gd_scene load_steps=7 format=3 uid="uid://bp1h4q7voqhfk"]
 
 [ext_resource type="Script" uid="uid://plt40tcd7666" path="res://main.gd" id="1_tubg1"]
+[ext_resource type="Texture2D" uid="uid://2dq331pb355l" path="res://art/temp/cursor_red.png" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dwanxtmbqk1ym" path="res://screens/hud/hud.tscn" id="2_q8oy7"]
+[ext_resource type="Texture2D" uid="uid://e10sfls8cob7" path="res://art/temp/cursor_blue.png" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://cgtbu5l52m5gk" path="res://screens/pause/pause_menu.tscn" id="3_qne8x"]
 [ext_resource type="PackedScene" uid="uid://piuow3foau7w" path="res://screens/title/title_screen.tscn" id="4_4nmqe"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tubg1")
+filter_cursor_textures = Dictionary[int, Texture2D]({
+0: null,
+1: ExtResource("2_7mycd"),
+2: ExtResource("3_272bh")
+})
 
 [node name="World" type="Node2D" parent="."]
 
