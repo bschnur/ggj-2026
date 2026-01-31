@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+#func _ready() -> void:
+	#pass
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseMotion and not event is InputEventJoypadMotion:
 		leave_title()

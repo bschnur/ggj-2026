@@ -11,7 +11,7 @@ script = ExtResource("1_tubg1")
 [node name="World" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="World"]
-offset = Vector2(960, 540)
+anchor_mode = 0
 
 [node name="UI Layer" type="CanvasLayer" parent="."]
 
