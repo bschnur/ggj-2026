@@ -1,6 +1,8 @@
 extends Node
 
 var current_screen_scale := 1.0
+# Todo: also store a scalar representing the current game scale compared to 1080p.
+# This should be used to resize the mouse cursor images - and change the filter radius!
 var os_screen_scale: float
 
 @onready var title_screen := %TitleScreen
