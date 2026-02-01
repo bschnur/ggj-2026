@@ -1,65 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://piuow3foau7w"]
+[gd_scene load_steps=3 format=3 uid="uid://piuow3foau7w"]
 
 [ext_resource type="Script" uid="uid://dkqoof37cqsam" path="res://screens/title/title_screen.gd" id="1_ig5kc"]
-[ext_resource type="Texture2D" uid="uid://dr77xchy8ul0r" path="res://art/temp/title_red.png" id="2_05l2w"]
-[ext_resource type="Shader" uid="uid://c3p0gmtki8c11" path="res://shaders/mix_below.gdshader" id="2_hafda"]
-[ext_resource type="Script" uid="uid://bnepofwngvgvk" path="res://shaders/mix_subviewport.gd" id="2_ucdjm"]
-[ext_resource type="Texture2D" uid="uid://dp2n4bf4gylhn" path="res://art/temp/title_blue.png" id="3_hafda"]
-[ext_resource type="Shader" uid="uid://ba827y65qbgu1" path="res://shaders/mix_above.gdshader" id="6_tpml5"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpml5"]
-shader = ExtResource("2_hafda")
-shader_parameter/color_id = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
-shader = ExtResource("6_tpml5")
-shader_parameter/color_id = 2
+[ext_resource type="PackedScene" uid="uid://dqbrmx3p3v5wa" path="res://shaders/mix_sub_viewport_container.tscn" id="2_pefg2"]
 
 [node name="TitleScreen" type="CanvasLayer"]
 script = ExtResource("1_ig5kc")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.30336, 0.30240002, 0.36, 1)
+color = Color(1, 0.9411765, 1, 1)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
-script = ExtResource("2_ucdjm")
-
-[node name="Beak & Claw" type="TextureRect" parent="SubViewportContainer/SubViewport"]
-material = SubResource("ShaderMaterial_tpml5")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_hafda")
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="SubViewportContainer/SubViewport"]
-visible = false
-copy_mode = 2
-
-[node name="Fang & Talon" type="TextureRect" parent="SubViewportContainer/SubViewport"]
-material = SubResource("ShaderMaterial_hafda")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_05l2w")
+[node name="SubViewportContainer" parent="." instance=ExtResource("2_pefg2")]

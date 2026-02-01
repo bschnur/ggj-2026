@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bp1h4q7voqhfk"]
+[gd_scene load_steps=10 format=3 uid="uid://bp1h4q7voqhfk"]
 
 [ext_resource type="Script" uid="uid://plt40tcd7666" path="res://main.gd" id="1_tubg1"]
 [ext_resource type="Texture2D" uid="uid://2dq331pb355l" path="res://art/temp/cursor_red.png" id="2_7mycd"]
@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://e10sfls8cob7" path="res://art/temp/cursor_blue.png" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://cgtbu5l52m5gk" path="res://screens/pause/pause_menu.tscn" id="3_qne8x"]
 [ext_resource type="PackedScene" uid="uid://piuow3foau7w" path="res://screens/title/title_screen.tscn" id="4_4nmqe"]
-[ext_resource type="Texture2D" uid="uid://bjal8jfpi0t6k" path="res://art/temp/bkg_red.png" id="4_5vw27"]
-[ext_resource type="Texture2D" uid="uid://dwreisuckbfjv" path="res://art/temp/bkg_blue.png" id="5_kek77"]
+[ext_resource type="Texture2D" uid="uid://bsbd2ruc1vt7u" path="res://art/temp/bkg_red.png" id="4_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dqbrmx3p3v5wa" path="res://shaders/mix_sub_viewport_container.tscn" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://bexj5j6masqo2" path="res://art/temp/bkg_blue.png" id="5_kek77"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tubg1")
@@ -17,21 +18,20 @@ filter_cursor_textures = Dictionary[int, Texture2D]({
 2: ExtResource("3_272bh")
 })
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 
-[node name="Camera2D" type="Camera2D" parent="World"]
-anchor_mode = 0
+[node name="ColorRect" type="ColorRect" parent="World"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.9411765, 1, 1)
 
-[node name="Bkg Red" type="Sprite2D" parent="World"]
-visible = false
-texture = ExtResource("4_5vw27")
-centered = false
-
-[node name="Bkg Blue" type="Sprite2D" parent="World"]
-visible = false
-texture = ExtResource("5_kek77")
-centered = false
+[node name="SubViewportContainer2" parent="World" instance=ExtResource("4_272bh")]
+below_texture = ExtResource("5_kek77")
+above_texture = ExtResource("4_5vw27")
 
 [node name="UI Layer" type="CanvasLayer" parent="."]
 
@@ -39,9 +39,11 @@ centered = false
 
 [node name="PauseMenu" parent="UI Layer" instance=ExtResource("3_qne8x")]
 unique_name_in_owner = true
+visible = false
 
 [node name="TitleScreen" parent="." instance=ExtResource("4_4nmqe")]
 unique_name_in_owner = true
+visible = false
 
 [connection signal="went_to_title" from="UI Layer/PauseMenu" to="." method="_on_pause_menu_went_to_title"]
 [connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]

@@ -12,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_nwcfo")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -66,13 +67,14 @@ text = "Display settings"
 horizontal_alignment = 1
 
 [node name="DisplaySettings" type="VBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection"]
+custom_minimum_size = Vector2(660, 0)
 layout_mode = 2
 theme_override_constants/separation = 40
 
 [node name="Resolution" type="HBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 40
+theme_override_constants/separation = 20
 
 [node name="ResolutionLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
 layout_mode = 2
@@ -88,15 +90,18 @@ popup/item_0/id = 0
 
 [node name="Fullscreen" type="HBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
 [node name="FullscreenLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Fullscreen:"
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="AudioSection" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
 layout_mode = 2
