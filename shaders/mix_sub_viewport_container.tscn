@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqbrmx3p3v5wa"]
+
+[ext_resource type="Script" uid="uid://b5r64h52rjlqa" path="res://shaders/mix_sub_viewport_container.gd" id="1_45ekq"]
+[ext_resource type="Script" uid="uid://bnepofwngvgvk" path="res://shaders/mix_subviewport.gd" id="2_up4pf"]
+[ext_resource type="Shader" uid="uid://c3p0gmtki8c11" path="res://shaders/mix_below.gdshader" id="3_qm8p2"]
+[ext_resource type="Texture2D" uid="uid://dp2n4bf4gylhn" path="res://art/temp/title_blue.png" id="4_qq5hf"]
+[ext_resource type="Shader" uid="uid://ba827y65qbgu1" path="res://shaders/mix_above.gdshader" id="5_qhp0s"]
+[ext_resource type="Texture2D" uid="uid://dr77xchy8ul0r" path="res://art/temp/title_red.png" id="6_l8hge"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpml5"]
+shader = ExtResource("3_qm8p2")
+shader_parameter/color_id = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
+shader = ExtResource("5_qhp0s")
+shader_parameter/color_id = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("1_45ekq")
+below_texture = ExtResource("4_qq5hf")
+above_texture = ExtResource("6_l8hge")
+
+[node name="MixSubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+script = ExtResource("2_up4pf")
+
+[node name="BelowTextureRect" type="TextureRect" parent="MixSubViewport"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_tpml5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_qq5hf")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="MixSubViewport"]
+visible = false
+copy_mode = 2
+
+[node name="AboveTextureRect" type="TextureRect" parent="MixSubViewport"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_hafda")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_l8hge")

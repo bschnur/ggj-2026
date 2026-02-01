@@ -7,6 +7,7 @@ var os_screen_scale: float
 
 @onready var title_screen := %TitleScreen
 @onready var pause_menu := %PauseMenu
+@onready var world := %World
 
 enum FilterColor {
 	NONE = 0,
@@ -36,6 +37,8 @@ func _ready() -> void:
 	init_cursor_images()
 	scale_cursor_images()
 	filter_color = FilterColor.RED
+	hide_and_disable(world)
+	show_and_enable(title_screen)
 
 func init_cursor_images() -> void:
 	for key in filter_cursor_textures:
@@ -67,17 +70,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 
 func _on_title_screen_dismissed() -> void:
-	hide_title_screen()
-
-func hide_title_screen() -> void:
-	title_screen.hide()
-	title_screen.process_mode = PROCESS_MODE_DISABLED
-
-func show_title_screen() -> void:
-	title_screen.show()
-	title_screen.process_mode = PROCESS_MODE_INHERIT
-
+	hide_and_disable(title_screen)
+	show_and_enable(world)
 
 func _on_pause_menu_went_to_title() -> void:
-	# Todo: reset world
-	show_title_screen()
+	hide_and_disable(world)
+	show_and_enable(title_screen)
+
+func show_and_enable(n: Node) -> void:
+	n.show()
+	n.process_mode = PROCESS_MODE_INHERIT
+	n.set_process_input(true)
+
+func hide_and_disable(n: Node) -> void:
+	n.hide()
+	n.process_mode = PROCESS_MODE_DISABLED
+	n.set_process_input(false)

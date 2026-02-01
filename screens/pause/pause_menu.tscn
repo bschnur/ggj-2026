@@ -67,12 +67,12 @@ horizontal_alignment = 1
 
 [node name="DisplaySettings" type="VBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 40
 
 [node name="Resolution" type="HBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings"]
 layout_mode = 2
-theme_override_constants/separation = 20
+size_flags_horizontal = 4
+theme_override_constants/separation = 40
 
 [node name="ResolutionLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
 layout_mode = 2
@@ -81,6 +81,10 @@ text = "Screen resolution: "
 [node name="ResolutionDropdown" type="OptionButton" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
 unique_name_in_owner = true
 layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
 
 [node name="Fullscreen" type="HBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings"]
 layout_mode = 2
