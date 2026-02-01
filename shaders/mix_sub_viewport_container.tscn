@@ -23,8 +23,6 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 script = ExtResource("1_45ekq")
-below_texture = ExtResource("4_qq5hf")
-above_texture = ExtResource("6_l8hge")
 
 [node name="MixSubViewport" type="SubViewport" parent="."]
 transparent_bg = true

@@ -10,3 +10,8 @@ signal dismissed
 
 func leave_title() -> void:
 	dismissed.emit()
+
+# Called by main when navigating to title
+func start_animations() -> void:
+	pass
+	# Todo: reset/play any animations

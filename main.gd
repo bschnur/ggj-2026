@@ -37,8 +37,12 @@ func _ready() -> void:
 	init_cursor_images()
 	scale_cursor_images()
 	filter_color = FilterColor.RED
+	nav_to_title()
+
+func nav_to_title() -> void:
 	hide_and_disable(world)
 	show_and_enable(title_screen)
+	title_screen.start_animations()
 
 func init_cursor_images() -> void:
 	for key in filter_cursor_textures:
@@ -74,8 +78,7 @@ func _on_title_screen_dismissed() -> void:
 	show_and_enable(world)
 
 func _on_pause_menu_went_to_title() -> void:
-	hide_and_disable(world)
-	show_and_enable(title_screen)
+	nav_to_title()
 
 func show_and_enable(n: Node) -> void:
 	n.show()
