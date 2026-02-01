@@ -17,6 +17,9 @@ var _filter_cursor_images: Dictionary[FilterColor, Image]
 
 var filter_color := FilterColor.NONE:
 	set(value):
+		# Todo: the below would probably be better to set on detected display DPI change - but *shrug* it's a 48h jam.
+		if os_screen_scale != current_screen_scale:
+			scale_cursor_images()
 		filter_color = value
 		#var cursor_texture := filter_cursor_textures[filter_color]
 		var cursor_img := _filter_cursor_images[filter_color]
@@ -31,6 +34,7 @@ func _ready() -> void:
 	os_screen_scale = DisplayServer.screen_get_max_scale()
 	init_cursor_images()
 	scale_cursor_images()
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	filter_color = FilterColor.RED
 
 func init_cursor_images() -> void:

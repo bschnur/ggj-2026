@@ -23,6 +23,7 @@ theme = ExtResource("2_nwcfo")
 
 [node name="MainMenu" type="VBoxContainer" parent="CenterContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/separation = 40
@@ -48,7 +49,6 @@ text = "Quit"
 
 [node name="OptionsMenu" type="VBoxContainer" parent="CenterContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/separation = 60
@@ -88,7 +88,7 @@ theme_override_constants/separation = 20
 
 [node name="FullscreenLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
 layout_mode = 2
-text = "Screen resolution: "
+text = "Fullscreen:"
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
 unique_name_in_owner = true

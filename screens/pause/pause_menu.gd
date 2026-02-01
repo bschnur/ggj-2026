@@ -26,6 +26,11 @@ func _ready() -> void:
 	init_settings_values()
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
+# Maybe unnecessary. Intended to catch cases where OS (ahem, Mac) changes fullscreen status.
+# On Mac, doesn't seem to trigger on what I'd consider window mode changes.
+#func _on_window_mode_changed(mode: DisplayServer.WindowMode):
+	#%FullscreenCheckBox.pressed = (mode == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
+
 func init_visibility() -> void:
 	hide()
 	main_menu.show()
@@ -97,7 +102,7 @@ func apply_settings() -> void:
 	Settings.screen_resolution = screen_resolutions.find_key(res_id)
 	Settings.fullscreen_enabled = %FullscreenCheckBox.button_pressed
 	
-	Settings.save_settings()
+	Settings.save_and_apply()
 
 signal went_to_title
 func _on_quit_to_title_button_pressed() -> void:
