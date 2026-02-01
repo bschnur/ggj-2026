@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://dt57kshv3u1qj"
+path="res://.godot/imported/blue mask 3 bitmask.png-9c1046f3d3714627886976d46de296e9.res"
+
+[deps]
+
+source_file="res://art/masks/blue mask 3 bitmask.png"
+dest_files=["res://.godot/imported/blue mask 3 bitmask.png-9c1046f3d3714627886976d46de296e9.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

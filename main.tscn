@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://e10sfls8cob7" path="res://art/cursor_blue.png" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://cgtbu5l52m5gk" path="res://screens/pause/pause_menu.tscn" id="3_qne8x"]
 [ext_resource type="PackedScene" uid="uid://piuow3foau7w" path="res://screens/title/title_screen.tscn" id="4_4nmqe"]
-[ext_resource type="Texture2D" uid="uid://ccqd7dwcqmrg0" path="res://art/bkg_red.png" id="4_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dqbrmx3p3v5wa" path="res://shaders/mix_sub_viewport_container.tscn" id="4_272bh"]
-[ext_resource type="Texture2D" uid="uid://bi41hpghsxgdk" path="res://art/bkg_blue.png" id="5_kek77"]
+[ext_resource type="Texture2D" uid="uid://ctir38l7dpemo" path="res://art/bkg_blue_w_masks.png" id="5_4c57u"]
+[ext_resource type="Texture2D" uid="uid://d4cjsnm2sxetb" path="res://art/bkg_red_w_masks.png" id="6_efxa6"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tubg1")
@@ -20,6 +20,7 @@ filter_cursor_textures = Dictionary[int, Texture2D]({
 
 [node name="World" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="World"]
 anchors_preset = 15
@@ -30,8 +31,8 @@ grow_vertical = 2
 color = Color(1, 0.9411765, 1, 1)
 
 [node name="SubViewportContainer2" parent="World" instance=ExtResource("4_272bh")]
-below_texture = ExtResource("5_kek77")
-above_texture = ExtResource("4_5vw27")
+below_texture = ExtResource("5_4c57u")
+above_texture = ExtResource("6_efxa6")
 
 [node name="UI Layer" type="CanvasLayer" parent="."]
 

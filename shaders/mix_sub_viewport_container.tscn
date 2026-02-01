@@ -1,15 +1,40 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqbrmx3p3v5wa"]
+[gd_scene load_steps=30 format=3 uid="uid://dqbrmx3p3v5wa"]
 
 [ext_resource type="Script" uid="uid://b5r64h52rjlqa" path="res://shaders/mix_sub_viewport_container.gd" id="1_45ekq"]
 [ext_resource type="Script" uid="uid://bnepofwngvgvk" path="res://shaders/mix_subviewport.gd" id="2_up4pf"]
 [ext_resource type="Shader" uid="uid://c3p0gmtki8c11" path="res://shaders/mix_below.gdshader" id="3_qm8p2"]
 [ext_resource type="Texture2D" uid="uid://dp2n4bf4gylhn" path="res://art/title/title_blue.png" id="4_qq5hf"]
 [ext_resource type="Shader" uid="uid://ba827y65qbgu1" path="res://shaders/mix_above.gdshader" id="5_qhp0s"]
+[ext_resource type="Texture2D" uid="uid://0jufpj2y6b7n" path="res://art/masks/blue mask 1 empty.png" id="6_cgme8"]
 [ext_resource type="Texture2D" uid="uid://dr77xchy8ul0r" path="res://art/title/title_red.png" id="6_l8hge"]
+[ext_resource type="Texture2D" uid="uid://bkv63x0v70kv2" path="res://art/masks/blue mask 1 fill.png" id="7_2oijf"]
+[ext_resource type="Shader" uid="uid://ccimq8iy7ypt2" path="res://shaders/mix_above_texture_button.gdshader" id="7_70cw4"]
+[ext_resource type="Texture2D" uid="uid://dm4rgyanny8fo" path="res://art/masks/blue mask 2 empty.png" id="10_2oijf"]
+[ext_resource type="Texture2D" uid="uid://bph510onhved5" path="res://art/masks/transparent_pixel.png" id="10_evorw"]
+[ext_resource type="Texture2D" uid="uid://4s6ldg1ss4se" path="res://art/masks/blue mask 2 fill.png" id="10_tbs0l"]
+[ext_resource type="BitMap" uid="uid://satek34hkd7o" path="res://art/masks/blue mask 1 bitmask.png" id="11_ikbdl"]
+[ext_resource type="BitMap" uid="uid://dqoj0pnxc7q4w" path="res://art/masks/blue mask 2 bitmask.png" id="12_o1k6c"]
+[ext_resource type="Texture2D" uid="uid://c5ex3mjddg3ae" path="res://art/masks/blue mask 3 fill.png" id="12_on2d4"]
+[ext_resource type="Texture2D" uid="uid://dcr5bjunpcdnj" path="res://art/masks/blue mask 3 empty.png" id="13_wa3mu"]
+[ext_resource type="BitMap" uid="uid://dt57kshv3u1qj" path="res://art/masks/blue mask 3 bitmask.png" id="15_tbs0l"]
+[ext_resource type="Texture2D" uid="uid://beoys143o0t75" path="res://art/masks/red mask 1 empty.png" id="18_jcusf"]
+[ext_resource type="Texture2D" uid="uid://dd77cqfhg8b2l" path="res://art/masks/red mask 1 fill.png" id="20_ls750"]
+[ext_resource type="BitMap" uid="uid://dtohugte8cn6q" path="res://art/masks/red mask 1 bitmask.png" id="20_wa3mu"]
+[ext_resource type="Texture2D" uid="uid://ci51ywldpmory" path="res://art/masks/red mask 2 empty.png" id="21_ls750"]
+[ext_resource type="Texture2D" uid="uid://b20vpybwttcmm" path="res://art/masks/red mask 2 fill.png" id="22_jcusf"]
+[ext_resource type="BitMap" uid="uid://c3b6wj1gtmex2" path="res://art/masks/red mask 2 bitmask.png" id="23_dl0no"]
+[ext_resource type="Texture2D" uid="uid://bpxq5td4c81fr" path="res://art/masks/red mask 3 empty.png" id="24_dl0no"]
+[ext_resource type="Texture2D" uid="uid://co0p2te5m3ngk" path="res://art/masks/red mask 3 fill.png" id="24_wa3mu"]
+[ext_resource type="BitMap" uid="uid://duid3n5d2ai27" path="res://art/masks/red mask 3 bitmask.png" id="28_x1gik"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tpml5"]
 shader = ExtResource("3_qm8p2")
 shader_parameter/color_id = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h0bc2"]
+resource_local_to_scene = true
+shader = ExtResource("7_70cw4")
+shader_parameter/color_id = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
 shader = ExtResource("5_qhp0s")
@@ -41,8 +66,82 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_qq5hf")
 
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="MixSubViewport"]
+copy_mode = 2
+
+[node name="Blue Masks" type="Control" parent="MixSubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BlueMask1" type="TextureButton" parent="MixSubViewport/Blue Masks"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_h0bc2")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1827.0
+offset_top = 787.0
+offset_right = 1955.0
+offset_bottom = 915.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+texture_normal = ExtResource("6_cgme8")
+texture_pressed = ExtResource("7_2oijf")
+texture_disabled = ExtResource("7_2oijf")
+texture_focused = ExtResource("10_evorw")
+texture_click_mask = ExtResource("11_ikbdl")
+
+[node name="BlueMask2" type="TextureButton" parent="MixSubViewport/Blue Masks"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_h0bc2")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1222.0
+offset_top = 870.0
+offset_right = 1350.0
+offset_bottom = 998.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+texture_normal = ExtResource("10_2oijf")
+texture_pressed = ExtResource("10_tbs0l")
+texture_disabled = ExtResource("10_tbs0l")
+texture_focused = ExtResource("10_evorw")
+texture_click_mask = ExtResource("12_o1k6c")
+
+[node name="BlueMask3" type="TextureButton" parent="MixSubViewport/Blue Masks"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_h0bc2")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 342.0
+offset_top = 283.0
+offset_right = 470.0
+offset_bottom = 411.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+texture_normal = ExtResource("13_wa3mu")
+texture_pressed = ExtResource("12_on2d4")
+texture_disabled = ExtResource("12_on2d4")
+texture_focused = ExtResource("10_evorw")
+texture_click_mask = ExtResource("15_tbs0l")
+
 [node name="BackBufferCopy" type="BackBufferCopy" parent="MixSubViewport"]
-visible = false
 copy_mode = 2
 
 [node name="AboveTextureRect" type="TextureRect" parent="MixSubViewport"]
@@ -53,4 +152,83 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("6_l8hge")
+
+[node name="BackBufferCopy3" type="BackBufferCopy" parent="MixSubViewport"]
+copy_mode = 2
+
+[node name="Control2" type="Control" parent="MixSubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="RedMask1" type="TextureButton" parent="MixSubViewport/Control2"]
+material = SubResource("ShaderMaterial_h0bc2")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1345.0
+offset_top = 499.0
+offset_right = 1473.0
+offset_bottom = 627.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+texture_normal = ExtResource("18_jcusf")
+texture_pressed = ExtResource("20_ls750")
+texture_disabled = ExtResource("20_ls750")
+texture_focused = ExtResource("10_evorw")
+texture_click_mask = ExtResource("20_wa3mu")
+
+[node name="RedMask2" type="TextureButton" parent="MixSubViewport/Control2"]
+material = SubResource("ShaderMaterial_h0bc2")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 300.0
+offset_top = 634.0
+offset_right = 428.0
+offset_bottom = 762.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+texture_normal = ExtResource("21_ls750")
+texture_pressed = ExtResource("22_jcusf")
+texture_disabled = ExtResource("22_jcusf")
+texture_focused = ExtResource("10_evorw")
+texture_click_mask = ExtResource("23_dl0no")
+
+[node name="RedMask3" type="TextureButton" parent="MixSubViewport/Control2"]
+material = SubResource("ShaderMaterial_h0bc2")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 749.0
+offset_top = 726.0
+offset_right = 877.0
+offset_bottom = 854.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+texture_normal = ExtResource("24_dl0no")
+texture_pressed = ExtResource("24_wa3mu")
+texture_disabled = ExtResource("24_wa3mu")
+texture_focused = ExtResource("10_evorw")
+texture_click_mask = ExtResource("28_x1gik")
+
+[connection signal="pressed" from="MixSubViewport/Blue Masks/BlueMask1" to="MixSubViewport" method="_on_blue_mask_pressed" flags=18]
+[connection signal="pressed" from="MixSubViewport/Blue Masks/BlueMask2" to="MixSubViewport" method="_on_blue_mask_pressed" flags=18]
+[connection signal="pressed" from="MixSubViewport/Blue Masks/BlueMask3" to="MixSubViewport" method="_on_blue_mask_pressed" flags=18]
+[connection signal="pressed" from="MixSubViewport/Control2/RedMask1" to="MixSubViewport" method="_on_red_mask_pressed" flags=18]

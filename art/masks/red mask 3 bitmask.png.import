@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://duid3n5d2ai27"
+path="res://.godot/imported/red mask 3 bitmask.png-611c2c55395ce575b1487c6213838374.res"
+
+[deps]
+
+source_file="res://art/masks/red mask 3 bitmask.png"
+dest_files=["res://.godot/imported/red mask 3 bitmask.png-611c2c55395ce575b1487c6213838374.res"]
+
+[params]
+
+create_from=1
+threshold=0.5
