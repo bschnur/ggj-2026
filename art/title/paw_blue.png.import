@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxdsti5ji4btm"
-path="res://.godot/imported/talon_blue.png-e310486ffdf1ce8b909338cf744552c4.ctex"
+uid="uid://drantv52wn5i0"
+path="res://.godot/imported/paw_blue.png-5b553bccd271af8a7143e50bcda9980f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/talon_blue.png"
-dest_files=["res://.godot/imported/talon_blue.png-e310486ffdf1ce8b909338cf744552c4.ctex"]
+source_file="res://art/title/paw_blue.png"
+dest_files=["res://.godot/imported/paw_blue.png-5b553bccd271af8a7143e50bcda9980f.ctex"]
 
 [params]
 

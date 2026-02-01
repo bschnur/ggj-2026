@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ij01ay66amj3"
-path="res://.godot/imported/paw_red.png-81660f92c8d272f93fad4d770f8a3aa4.ctex"
+uid="uid://d0k5y37ux57dt"
+path="res://.godot/imported/blue mask 1 outline.png-d78b9c65e0eb49ecce2ee3351545e569.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/paw_red.png"
-dest_files=["res://.godot/imported/paw_red.png-81660f92c8d272f93fad4d770f8a3aa4.ctex"]
+source_file="res://art/masks/blue mask 1 outline.png"
+dest_files=["res://.godot/imported/blue mask 1 outline.png-d78b9c65e0eb49ecce2ee3351545e569.ctex"]
 
 [params]
 

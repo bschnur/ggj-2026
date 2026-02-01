@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp2n4bf4gylhn"
-path="res://.godot/imported/title_blue.png-a442fd96899348e43b35c918d4df3b83.ctex"
+uid="uid://cbrltyux71cws"
+path="res://.godot/imported/claw_red.png-d736f1412296339273dfe4b942caa96a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/title_blue.png"
-dest_files=["res://.godot/imported/title_blue.png-a442fd96899348e43b35c918d4df3b83.ctex"]
+source_file="res://art/title/claw_red.png"
+dest_files=["res://.godot/imported/claw_red.png-d736f1412296339273dfe4b942caa96a.ctex"]
 
 [params]
 

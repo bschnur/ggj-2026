@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs3kfqpyn1jdq"
-path="res://.godot/imported/talon_red.png-38a31bb7b77346486bff99b7f294f142.ctex"
+uid="uid://b0kb1q6rgvhbs"
+path="res://.godot/imported/foot_red.png-2117df028e0b87bc4fc2ef2414ae7b36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/talon_red.png"
-dest_files=["res://.godot/imported/talon_red.png-38a31bb7b77346486bff99b7f294f142.ctex"]
+source_file="res://art/title/foot_red.png"
+dest_files=["res://.godot/imported/foot_red.png-2117df028e0b87bc4fc2ef2414ae7b36.ctex"]
 
 [params]
 

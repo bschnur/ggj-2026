@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbrltyux71cws"
-path="res://.godot/imported/claw_red.png-6a6a51375e4ee5ec4d7d47a8637e0fb0.ctex"
+uid="uid://v0vsaryho2hj"
+path="res://.godot/imported/blue mask 2 outline.png-6a200265084a7621a777b2604bf9416d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/claw_red.png"
-dest_files=["res://.godot/imported/claw_red.png-6a6a51375e4ee5ec4d7d47a8637e0fb0.ctex"]
+source_file="res://art/masks/blue mask 2 outline.png"
+dest_files=["res://.godot/imported/blue mask 2 outline.png-6a200265084a7621a777b2604bf9416d.ctex"]
 
 [params]
 

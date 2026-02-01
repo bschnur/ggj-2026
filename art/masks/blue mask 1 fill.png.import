@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr77xchy8ul0r"
-path="res://.godot/imported/title_red.png-589dedb2a2ff53aa1f2ab18fc69eb0c1.ctex"
+uid="uid://bkv63x0v70kv2"
+path="res://.godot/imported/blue mask 1 fill.png-2d5e327a78bae3035784f8a1d6706e61.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/title_red.png"
-dest_files=["res://.godot/imported/title_red.png-589dedb2a2ff53aa1f2ab18fc69eb0c1.ctex"]
+source_file="res://art/masks/blue mask 1 fill.png"
+dest_files=["res://.godot/imported/blue mask 1 fill.png-2d5e327a78bae3035784f8a1d6706e61.ctex"]
 
 [params]
 
