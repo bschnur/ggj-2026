@@ -21,7 +21,6 @@ var filter_color := FilterColor.NONE:
 		if os_screen_scale != current_screen_scale:
 			scale_cursor_images()
 		filter_color = value
-		#var cursor_texture := filter_cursor_textures[filter_color]
 		var cursor_img := _filter_cursor_images[filter_color]
 		var hotspot := Vector2.ZERO
 		if cursor_img is Image:
@@ -34,7 +33,6 @@ func _ready() -> void:
 	os_screen_scale = DisplayServer.screen_get_max_scale()
 	init_cursor_images()
 	scale_cursor_images()
-	#Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	filter_color = FilterColor.RED
 
 func init_cursor_images() -> void:

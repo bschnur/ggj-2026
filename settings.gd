@@ -16,11 +16,6 @@ func _ready() -> void:
 	_load_settings()
 	_apply_settings()
 
-# Maybe unnecessary. Intended to catch cases where OS (ahem, Mac) changes fullscreen status.
-# On Mac, doesn't seem to trigger on what I'd consider window mode changes.
-#func _on_window_mode_changed(mode: DisplayServer.WindowMode):
-	#fullscreen_enabled = (mode == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
-
 func save_and_apply() -> void:
 	_apply_settings()
 	_save_settings()
@@ -73,10 +68,6 @@ func _apply_settings() -> void:
 		else:
 			new_fullscreen_mode = DisplayServer.WINDOW_MODE_FULLSCREEN
 		DisplayServer.window_set_mode(new_fullscreen_mode)
-		# Intended to resolve cursor freeze on resolution change when mouse mode is "captured".
-		# Not working, omitting since not going to capture mouse.
-		#var screen_center = get_viewport().get_visible_rect().size * 0.5
-		#Input.warp_mouse(screen_center)
 	
 	var actual_screen_resolution := get_viewport().get_visible_rect().size
 	
