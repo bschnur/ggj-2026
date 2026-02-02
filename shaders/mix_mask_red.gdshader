@@ -17,16 +17,6 @@ void vertex() {
 }
 
 void fragment() {
-	// Check if we are filtering out this color with our spotlight.
-	if (mouse_filtering_color_id == color_id) {
-		// Get the distance from the [ostensible] mouse position to this fragment.
-		float dist = distance(v_screen_pos, mouse_pos);
-		// Check whether we are inside the spotlight/circle.
-		if (dist < mouse_filtering_radius) {
-	        discard; // Don't render this pixel.
-		}
-    }
-	
 	vec2 v_screen_uv = v_screen_pos * SCREEN_PIXEL_SIZE;
 	
 	vec4 base = texture(buffer, v_screen_uv);
@@ -40,4 +30,14 @@ void fragment() {
 	result.a = 1.0 - (1.0 - blend.a) * (1.0 - base.a); // "Screen" formula
 	
 	COLOR = result;
+	
+	// Check if we are filtering out this color with our spotlight.
+	if (mouse_filtering_color_id == color_id) {
+		// Get the distance from the [ostensible] mouse position to this fragment.
+		float dist = distance(v_screen_pos, mouse_pos);
+		// Check whether we are inside the spotlight/circle.
+		if (dist < mouse_filtering_radius) {
+	        COLOR = base;
+		}
+    }
 }

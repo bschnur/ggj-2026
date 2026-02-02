@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dqbrmx3p3v5wa"]
+[gd_scene load_steps=32 format=3 uid="uid://dqbrmx3p3v5wa"]
 
 [ext_resource type="Script" uid="uid://b5r64h52rjlqa" path="res://shaders/mix_sub_viewport_container.gd" id="1_45ekq"]
 [ext_resource type="Script" uid="uid://bnepofwngvgvk" path="res://shaders/mix_subviewport.gd" id="2_up4pf"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dcr5bjunpcdnj" path="res://art/masks/blue mask 3 empty.png" id="13_wa3mu"]
 [ext_resource type="BitMap" uid="uid://dt57kshv3u1qj" path="res://art/masks/blue mask 3 bitmask.png" id="15_tbs0l"]
 [ext_resource type="Texture2D" uid="uid://beoys143o0t75" path="res://art/masks/red mask 1 empty.png" id="18_jcusf"]
+[ext_resource type="Shader" uid="uid://ccimq8iy7ypt2" path="res://shaders/mix_mask_red.gdshader" id="18_ls750"]
 [ext_resource type="Texture2D" uid="uid://dd77cqfhg8b2l" path="res://art/masks/red mask 1 fill.png" id="20_ls750"]
 [ext_resource type="BitMap" uid="uid://dtohugte8cn6q" path="res://art/masks/red mask 1 bitmask.png" id="20_wa3mu"]
 [ext_resource type="Texture2D" uid="uid://ci51ywldpmory" path="res://art/masks/red mask 2 empty.png" id="21_ls750"]
@@ -34,10 +35,14 @@ shader_parameter/color_id = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h0bc2"]
 resource_local_to_scene = true
 shader = ExtResource("5_jcusf")
-shader_parameter/color_id = 2
+shader_parameter/color_id = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
 shader = ExtResource("5_qhp0s")
+shader_parameter/color_id = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dl0no"]
+shader = ExtResource("18_ls750")
 shader_parameter/color_id = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer"]
@@ -167,7 +172,7 @@ offset_bottom = 40.0
 mouse_filter = 1
 
 [node name="RedMask1" type="TextureButton" parent="MixSubViewport/Control2"]
-material = SubResource("ShaderMaterial_h0bc2")
+material = SubResource("ShaderMaterial_dl0no")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -188,7 +193,7 @@ texture_focused = ExtResource("10_evorw")
 texture_click_mask = ExtResource("20_wa3mu")
 
 [node name="RedMask2" type="TextureButton" parent="MixSubViewport/Control2"]
-material = SubResource("ShaderMaterial_h0bc2")
+material = SubResource("ShaderMaterial_dl0no")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -209,7 +214,7 @@ texture_focused = ExtResource("10_evorw")
 texture_click_mask = ExtResource("23_dl0no")
 
 [node name="RedMask3" type="TextureButton" parent="MixSubViewport/Control2"]
-material = SubResource("ShaderMaterial_h0bc2")
+material = SubResource("ShaderMaterial_dl0no")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
