@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bp1h4q7voqhfk"]
+[gd_scene load_steps=10 format=3 uid="uid://bp1h4q7voqhfk"]
 
 [ext_resource type="Script" uid="uid://plt40tcd7666" path="res://main.gd" id="1_tubg1"]
 [ext_resource type="Texture2D" uid="uid://2dq331pb355l" path="res://art/cursor_red.png" id="2_7mycd"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dqbrmx3p3v5wa" path="res://shaders/mix_sub_viewport_container.tscn" id="4_272bh"]
 [ext_resource type="Texture2D" uid="uid://ctir38l7dpemo" path="res://art/bkg_blue_w_masks.png" id="5_4c57u"]
 [ext_resource type="Texture2D" uid="uid://d4cjsnm2sxetb" path="res://art/bkg_red_w_masks.png" id="6_efxa6"]
+[ext_resource type="PackedScene" uid="uid://csgok2hbpj1kn" path="res://screens/win/win_screen.tscn" id="9_kek77"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tubg1")
@@ -50,6 +51,10 @@ follow_viewport_enabled = true
 unique_name_in_owner = true
 centered = false
 
+[node name="WinScreen" parent="." instance=ExtResource("9_kek77")]
+unique_name_in_owner = true
+
 [connection signal="mask_found" from="World/SubViewportContainer2" to="." method="_on_mask_found"]
 [connection signal="went_to_title" from="PauseMenu" to="." method="_on_pause_menu_went_to_title"]
 [connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]
+[connection signal="dismissed" from="WinScreen" to="." method="_on_win_screen_dismissed"]

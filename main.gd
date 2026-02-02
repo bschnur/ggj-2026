@@ -8,6 +8,7 @@ var os_screen_scale: float
 @onready var title_screen := %TitleScreen
 @onready var pause_menu := %PauseMenu
 @onready var world := %World
+@onready var win_screen := %WinScreen
 
 var masks_remaining := 6
 
@@ -15,7 +16,7 @@ func _on_mask_found() -> void:
 	masks_remaining -= 1
 	if masks_remaining == 0:
 		# YOU WIN!
-		pass
+		nav_to_win_screen()
 
 enum FilterColor {
 	NONE = 0,
@@ -63,8 +64,13 @@ func _ready() -> void:
 
 func nav_to_title() -> void:
 	hide_and_disable(world)
+	hide_and_disable(win_screen)
 	show_and_enable(title_screen)
 	title_screen.start_animations()
+
+func nav_to_win_screen() -> void:
+	hide_and_disable(world)
+	show_and_enable(win_screen)
 
 func init_cursor_images() -> void:
 	for key in filter_cursor_textures:
@@ -123,3 +129,7 @@ func hide_and_disable(n: Node) -> void:
 
 func _on_mouse_moved(pos: Vector2) -> void:
 	%SoftwareMouse.position = pos
+
+
+func _on_win_screen_dismissed() -> void:
+	nav_to_title()
