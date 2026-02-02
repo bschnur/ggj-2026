@@ -4,9 +4,9 @@ const SETTINGS_FILE_PATH := "user://settings.cfg"
 var config := ConfigFile.new()
 
 var volume_master := 0.5
-var volume_music := 0.5
-var volume_sounds := 0.5
-var volume_voice := 0.5
+var volume_music := 1.0
+var volume_sounds := 1.0
+var volume_voice := 1.0
 
 var fullscreen_enabled := true
 var screen_resolution := "1920x1080"
