@@ -47,7 +47,7 @@ var filter_color := FilterColor.NONE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			#Input.set_custom_mouse_cursor(cursor_img, Input.CURSOR_ARROW, hotspot)
 		
-		RenderingServer.global_shader_parameter_set("mouse_filtering_color_id", filter_color)
+		RenderingServer.global_shader_parameter_set("mouse_lens_color_id", filter_color)
 
 func set_software_mouse_cursor(cursor_texture: Texture2D, hotspot: Vector2, show := true) -> void:
 	#var shape := Input.CURSOR_ARROW

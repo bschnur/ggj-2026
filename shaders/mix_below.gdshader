@@ -2,14 +2,14 @@ shader_type canvas_item;
 render_mode blend_disabled;
 
 global uniform vec2 mouse_pos;
-global uniform int mouse_filtering_color_id;
+global uniform int mouse_lens_color_id;
 global uniform float mouse_filtering_radius;
 
 uniform int color_id = 1;
 
 void fragment() {
 	// Check if we are filtering out this color with our spotlight.
-	if (mouse_filtering_color_id == color_id) {
+	if (mouse_lens_color_id != color_id) {
 		// Get the distance from the [ostensible] mouse position to this fragment.
 		float dist = distance(FRAGCOORD.xy, mouse_pos);
 		// Check whether we are inside the spotlight/circle.
