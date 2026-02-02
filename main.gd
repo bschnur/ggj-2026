@@ -14,11 +14,14 @@ var masks_remaining := 6
 
 func _on_mask_found() -> void:
 	masks_remaining -= 1
-	sound_player.play()
+	play_boop()
 	if masks_remaining == 0:
 		# YOU WIN!
 		masks_remaining = 6
 		nav_to_win_screen()
+
+func play_boop():
+	sound_player.play()
 
 enum FilterColor {
 	NONE = 0,
@@ -57,6 +60,8 @@ func set_software_mouse_cursor(cursor_texture: Texture2D, hotspot: Vector2, show
 	if show:
 		s_mouse.show()
 
+#var initialization_finished := false
+
 func _ready() -> void:
 	os_screen_scale = DisplayServer.screen_get_max_scale()
 	init_cursor_images()
@@ -64,6 +69,7 @@ func _ready() -> void:
 	filter_color = FilterColor.RED
 	play_current_music_track()
 	nav_to_title()
+	#initialization_finished = true
 
 const music_starts: Array[float] = [
 	30.0,
@@ -75,8 +81,9 @@ const music_ends: Array[float] = [
 	136.0,
 ]
 
-const music_fade_time := 2.0
-const music_gap := 8.0
+const music_fade_in_time := 1.0
+const music_fade_out_time := 4.0
+const music_gap := 2.0
 
 @onready var music_tracks := [
 	preload("res://audio/cats and birds.wav"),
@@ -91,26 +98,20 @@ const music_gap := 8.0
 @onready var sound_player = %SoundPlayer
 
 var current_music_track := 0
-	
-	#var _play_duration := music_ends[current_music_track] - music_starts[current_music_track]
-	#var _timer := get_tree().create_timer(_play_duration)
-	#_timer.connect("timeout", _on_music_playback_timer_timeout)
-
-#func _on_music_playback_timer_timeout() -> void:
-	#%AudioStreamPlayer.stop()
 
 func fade_in():
 	music_player.stream = music_tracks[current_music_track]
 	music_player.volume_db = -80  # Start silent
+	#music_player.call_deferred("play", music_starts[current_music_track])
 	music_player.play(music_starts[current_music_track])
-	var tween := get_tree().create_tween()
+	var tween := create_tween()
 	# Transition volume_db to 0 (normal volume) over the specified duration
-	tween.tween_property(music_player, "volume_db", 0.0, music_fade_time).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(music_player, "volume_db", 0.0, music_fade_in_time).set_trans(Tween.TRANS_SINE)
 
 func fade_out_before_end():
 	# 1. Calculate how long to wait before starting the fade
 	var current_pos = music_player.get_playback_position()
-	var time_until_fade = (music_ends[current_music_track] - current_pos) - music_fade_time
+	var time_until_fade = (music_ends[current_music_track] - current_pos) - music_fade_out_time
 
 	# 2. If there's time left, wait until the fade-out point
 	if time_until_fade > 0:
@@ -118,7 +119,7 @@ func fade_out_before_end():
 
 	# 3. Create the fade-out tween
 	var tween = create_tween()
-	tween.tween_property(music_player, "volume_db", -80.0, music_fade_time)
+	tween.tween_property(music_player, "volume_db", -80.0, music_fade_out_time)
 
 	# 4. Stop the player once the fade is complete to save resources
 	tween.finished.connect(_on_music_track_done)
@@ -161,6 +162,7 @@ func scale_cursor_images() -> void:
 		current_screen_scale = os_screen_scale
 
 func _unhandled_input(event: InputEvent) -> void:
+	#if initialization_finished:
 	if event.is_action_pressed("pause"):
 		get_tree().paused = true
 		pause_menu.show()
@@ -206,3 +208,7 @@ func _on_mouse_moved(pos: Vector2) -> void:
 
 func _on_win_screen_dismissed() -> void:
 	nav_to_title()
+
+
+func _on_pause_menu_boop_required() -> void:
+	play_boop()

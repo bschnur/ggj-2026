@@ -9,10 +9,18 @@ extends CanvasLayer
 
 @onready var resolution_dropdown := %ResolutionDropdown
 @onready var fullscreen_check_box := %FullscreenCheckBox
+
 @onready var master_slider := %MasterSlider
 @onready var music_slider := %MusicSlider
 @onready var sounds_slider := %SoundsSlider
 @onready var voice_slider := %VoiceSlider
+
+@onready var slider_to_bus_map := {
+	master_slider: Settings.AudioBus.MASTER,
+	music_slider: Settings.AudioBus.MUSIC,
+	sounds_slider: Settings.AudioBus.SOUNDS,
+	voice_slider: Settings.AudioBus.VOICE,
+}
 
 var screen_resolutions: Dictionary[String, int] = {
 	"3840x2160": 2160,
@@ -47,10 +55,11 @@ func init_resolution_values() -> void:
 		resolution_dropdown.add_item(res_name, screen_resolutions[res_name])
 
 func init_settings_values() -> void:
-	master_slider.value = Settings.volume_master
-	music_slider.value = Settings.volume_music
-	sounds_slider.value = Settings.volume_sounds
-	voice_slider.value = Settings.volume_voice
+	master_slider.value = Settings.bus_volumes[Settings.AudioBus.MASTER]
+	music_slider.value = Settings.bus_volumes[Settings.AudioBus.MUSIC]
+	sounds_slider.value = Settings.bus_volumes[Settings.AudioBus.SOUNDS]
+	voice_slider.value = Settings.bus_volumes[Settings.AudioBus.VOICE]
+	
 	fullscreen_check_box.button_pressed = Settings.fullscreen_enabled
 	var res_id := screen_resolutions[Settings.screen_resolution]
 	var res_idx: int = resolution_dropdown.get_item_index(res_id)
@@ -96,21 +105,26 @@ func _on_options_cancel_pressed() -> void:
 	# Todo: prompt user whether to discard changes, if there are any
 	navigate(main_menu)
 
+signal boop_required
 func _on_options_confirm_pressed() -> void:
-	apply_settings()
-	# Todo: confirmation sound.
+	apply_display_settings()
+	save_all_settings()
+	# Play confirmation sound (handled by main.gd).
+	boop_required.emit()
 	navigate(main_menu)
 
-func apply_settings() -> void:
-	Settings.volume_master = master_slider.value
-	Settings.volume_music = music_slider.value
-	Settings.volume_sounds = sounds_slider.value
-	Settings.volume_voice = voice_slider.value
-	
+func _on_slider_drag_ended(value_changed: bool, source: Slider) -> void:
+	if value_changed:
+		Settings.set_and_apply_audio_volume(slider_to_bus_map[source], source.value)
+	if source == sounds_slider:
+		boop_required.emit()
+
+func apply_display_settings() -> void:
 	var res_id: int = resolution_dropdown.get_item_id(resolution_dropdown.selected)
 	Settings.screen_resolution = screen_resolutions.find_key(res_id)
 	Settings.fullscreen_enabled = fullscreen_check_box.button_pressed
-	
+
+func save_all_settings() -> void:
 	Settings.save_and_apply()
 
 signal went_to_title

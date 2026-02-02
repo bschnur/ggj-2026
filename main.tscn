@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://crkcm6x8ih5ef" path="res://audio/pop-tap-click-fx-383733.mp3" id="10_4c57u"]
 
 [node name="Main" type="Node"]
+process_mode = 3
 script = ExtResource("1_tubg1")
 filter_cursor_textures = Dictionary[int, Texture2D]({
 0: null,
@@ -21,6 +22,7 @@ filter_cursor_textures = Dictionary[int, Texture2D]({
 
 [node name="World" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+process_mode = 1
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="World"]
@@ -45,7 +47,6 @@ unique_name_in_owner = true
 visible = false
 
 [node name="MouseLayer" type="CanvasLayer" parent="."]
-process_mode = 3
 follow_viewport_enabled = true
 
 [node name="SoftwareMouse" type="Sprite2D" parent="MouseLayer"]
@@ -57,15 +58,16 @@ unique_name_in_owner = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-process_mode = 3
 bus = &"Music"
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("10_4c57u")
+max_polyphony = 5
 bus = &"Sounds"
 
 [connection signal="mask_found" from="World/SubViewportContainer2" to="." method="_on_mask_found"]
+[connection signal="boop_required" from="PauseMenu" to="." method="_on_pause_menu_boop_required"]
 [connection signal="went_to_title" from="PauseMenu" to="." method="_on_pause_menu_went_to_title"]
 [connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]
 [connection signal="dismissed" from="WinScreen" to="." method="_on_win_screen_dismissed"]
