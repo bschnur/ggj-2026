@@ -55,6 +55,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Options"
 
+[node name="CreditsButton" type="Button" parent="CenterContainer/MainMenu"]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Credits"
+
 [node name="QuitButton" type="Button" parent="CenterContainer/MainMenu"]
 custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
@@ -63,6 +69,7 @@ text = "Quit"
 
 [node name="OptionsMenu" type="VBoxContainer" parent="CenterContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/separation = 60
@@ -256,11 +263,130 @@ text = "Quit to Desktop"
 layout_mode = 2
 text = "Back"
 
+[node name="Credits" type="VBoxContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="Devs" type="HBoxContainer" parent="CenterContainer/Credits"]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="Zeitgeist" type="VBoxContainer" parent="CenterContainer/Credits/Devs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.9411765, 0.9411765, 1)
+text = "Zeitgeist Antares / Eelwaffle"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Gameplay Concept & Design"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Code & Implementation"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "In-game Art"
+horizontal_alignment = 1
+
+[node name="Ben" type="VBoxContainer" parent="CenterContainer/Credits/Devs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/Credits/Devs/Ben"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.9411765, 0.9411765, 1)
+text = "Ben Schnur"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/Credits/Devs/Ben"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Gameplay Concept & Design"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CenterContainer/Credits/Devs/Ben"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Code & Implementation"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="CenterContainer/Credits/Devs/Ben"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "In-game Art"
+horizontal_alignment = 1
+
+[node name="Martin" type="VBoxContainer" parent="CenterContainer/Credits/Devs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/Credits/Devs/Martin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.9411765, 0.9411765, 1)
+text = "Martin Bayer"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/Credits/Devs/Martin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Music"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CenterContainer/Credits/Devs/Martin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Comradery"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="CenterContainer/Credits/Devs/Martin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Demeanor"
+horizontal_alignment = 1
+
+[node name="ThirdParty" type="VBoxContainer" parent="CenterContainer/Credits"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Godot" type="Label" parent="CenterContainer/Credits/ThirdParty"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Made in Godot"
+horizontal_alignment = 1
+
+[node name="Music" type="Label" parent="CenterContainer/Credits/ThirdParty"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Additional royalty-free music from zapsplat.com"
+horizontal_alignment = 1
+
+[node name="Sound" type="Label" parent="CenterContainer/Credits/ThirdParty"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
+text = "Sound effect provided by Virtual_Vibes via pixabay.com"
+horizontal_alignment = 1
+
+[node name="CreditsBackButton" type="Button" parent="CenterContainer/Credits"]
+layout_mode = 2
+text = "Back"
+
 [connection signal="pressed" from="CenterContainer/MainMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="CenterContainer/MainMenu/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MainMenu/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="CenterContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="CenterContainer/OptionsMenu/OptionsConfirmCancel/OptionsCancel" to="." method="_on_options_cancel_pressed"]
 [connection signal="pressed" from="CenterContainer/OptionsMenu/OptionsConfirmCancel/OptionsConfirm" to="." method="_on_options_confirm_pressed"]
 [connection signal="pressed" from="CenterContainer/QuitMenu/QuitToTitleButton" to="." method="_on_quit_to_title_button_pressed"]
 [connection signal="pressed" from="CenterContainer/QuitMenu/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]
 [connection signal="pressed" from="CenterContainer/QuitMenu/QuitBackButton" to="." method="_on_quit_back_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Credits/CreditsBackButton" to="." method="_on_credits_back_button_pressed"]

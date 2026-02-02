@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var main_menu := %MainMenu
 @onready var options_menu := %OptionsMenu
+@onready var credits := %Credits
 @onready var quit_menu := %QuitMenu
 
 @onready var current_submenu := main_menu
@@ -37,6 +38,7 @@ func init_visibility() -> void:
 	hide()
 	main_menu.show()
 	options_menu.hide()
+	credits.hide()
 	quit_menu.hide()
 
 func init_resolution_values() -> void:
@@ -120,4 +122,12 @@ func _on_quit_to_desktop_button_pressed() -> void:
 	get_tree().quit()
 
 func _on_quit_back_button_pressed() -> void:
+	navigate(main_menu)
+
+
+func _on_credits_button_pressed() -> void:
+	navigate(credits)
+
+
+func _on_credits_back_button_pressed() -> void:
 	navigate(main_menu)
