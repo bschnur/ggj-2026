@@ -50,5 +50,6 @@ follow_viewport_enabled = true
 unique_name_in_owner = true
 centered = false
 
+[connection signal="mask_found" from="World/SubViewportContainer2" to="." method="_on_mask_found"]
 [connection signal="went_to_title" from="PauseMenu" to="." method="_on_pause_menu_went_to_title"]
 [connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]

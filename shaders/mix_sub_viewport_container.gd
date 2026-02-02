@@ -13,3 +13,7 @@ func _ready() -> void:
 	
 func update_mouse_pos() -> void:
 	%MixSubViewport.update_mouse_pos()
+
+signal mask_found
+func _on_mix_sub_viewport_mask_found() -> void:
+	mask_found.emit()

@@ -9,6 +9,14 @@ var os_screen_scale: float
 @onready var pause_menu := %PauseMenu
 @onready var world := %World
 
+var masks_remaining := 6
+
+func _on_mask_found() -> void:
+	masks_remaining -= 1
+	if masks_remaining == 0:
+		# YOU WIN!
+		pass
+
 enum FilterColor {
 	NONE = 0,
 	RED = 1,
