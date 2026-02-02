@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://bnepofwngvgvk" path="res://shaders/mix_subviewport.gd" id="2_up4pf"]
 [ext_resource type="Shader" uid="uid://c3p0gmtki8c11" path="res://shaders/mix_below.gdshader" id="3_qm8p2"]
 [ext_resource type="Texture2D" uid="uid://dp2n4bf4gylhn" path="res://art/title/title_blue.png" id="4_qq5hf"]
+[ext_resource type="Shader" uid="uid://daulp304uph6n" path="res://shaders/mix_mask_blue.gdshader" id="5_jcusf"]
 [ext_resource type="Shader" uid="uid://ba827y65qbgu1" path="res://shaders/mix_above.gdshader" id="5_qhp0s"]
 [ext_resource type="Texture2D" uid="uid://0jufpj2y6b7n" path="res://art/masks/blue mask 1 empty.png" id="6_cgme8"]
 [ext_resource type="Texture2D" uid="uid://dr77xchy8ul0r" path="res://art/title/title_red.png" id="6_l8hge"]
 [ext_resource type="Texture2D" uid="uid://bkv63x0v70kv2" path="res://art/masks/blue mask 1 fill.png" id="7_2oijf"]
-[ext_resource type="Shader" uid="uid://ccimq8iy7ypt2" path="res://shaders/mix_above_texture_button.gdshader" id="7_70cw4"]
 [ext_resource type="Texture2D" uid="uid://dm4rgyanny8fo" path="res://art/masks/blue mask 2 empty.png" id="10_2oijf"]
 [ext_resource type="Texture2D" uid="uid://bph510onhved5" path="res://art/masks/transparent_pixel.png" id="10_evorw"]
 [ext_resource type="Texture2D" uid="uid://4s6ldg1ss4se" path="res://art/masks/blue mask 2 fill.png" id="10_tbs0l"]
@@ -33,7 +33,7 @@ shader_parameter/color_id = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h0bc2"]
 resource_local_to_scene = true
-shader = ExtResource("7_70cw4")
+shader = ExtResource("5_jcusf")
 shader_parameter/color_id = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
