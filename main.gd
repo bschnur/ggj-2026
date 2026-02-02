@@ -24,19 +24,33 @@ var filter_color := FilterColor.NONE:
 		if os_screen_scale != current_screen_scale:
 			scale_cursor_images()
 		filter_color = value
-		var cursor_img := _filter_cursor_images[filter_color]
-		var hotspot := Vector2.ZERO
-		if cursor_img is Image:
-			hotspot = cursor_img.get_size() * 0.5
-		Input.set_custom_mouse_cursor(cursor_img, Input.CURSOR_ARROW, hotspot)
+		
+		if filter_color != FilterColor.NONE:
+			var cursor_texture := filter_cursor_textures[filter_color]
+			var hotspot := Vector2.ZERO
+			
+			hotspot = cursor_texture.get_size() * 0.5
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+			set_software_mouse_cursor(cursor_texture, hotspot, true)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			#Input.set_custom_mouse_cursor(cursor_img, Input.CURSOR_ARROW, hotspot)
+		
 		RenderingServer.global_shader_parameter_set("mouse_filtering_color_id", filter_color)
 
+func set_software_mouse_cursor(cursor_texture: Texture2D, hotspot: Vector2, show := true) -> void:
+	#var shape := Input.CURSOR_ARROW
+	var s_mouse := %SoftwareMouse
+	s_mouse.texture = cursor_texture
+	s_mouse.offset = -hotspot
+	if show:
+		s_mouse.show()
 
 func _ready() -> void:
 	os_screen_scale = DisplayServer.screen_get_max_scale()
 	init_cursor_images()
 	scale_cursor_images()
-	filter_color = FilterColor.RED
+	filter_color = FilterColor.NONE
 	nav_to_title()
 
 func nav_to_title() -> void:
@@ -65,8 +79,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		pause_menu.show()
 	elif event.is_action_pressed("toggle_spotlight_filter"):
 		match filter_color:
-			#FilterColor.NONE:
-				#pass
+			FilterColor.NONE:
+				# Temporary/debug. TODO: remove/pass
+				filter_color = FilterColor.BLUE
 			FilterColor.RED:
 				filter_color = FilterColor.BLUE
 			FilterColor.BLUE:
@@ -89,3 +104,7 @@ func hide_and_disable(n: Node) -> void:
 	n.hide()
 	n.process_mode = PROCESS_MODE_DISABLED
 	n.set_process_input(false)
+
+
+func _on_mouse_moved(pos: Vector2) -> void:
+	%SoftwareMouse.position = pos

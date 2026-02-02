@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bp1h4q7voqhfk"]
+[gd_scene load_steps=9 format=3 uid="uid://bp1h4q7voqhfk"]
 
 [ext_resource type="Script" uid="uid://plt40tcd7666" path="res://main.gd" id="1_tubg1"]
 [ext_resource type="Texture2D" uid="uid://2dq331pb355l" path="res://art/cursor_red.png" id="2_7mycd"]
-[ext_resource type="PackedScene" uid="uid://dwanxtmbqk1ym" path="res://screens/hud/hud.tscn" id="2_q8oy7"]
 [ext_resource type="Texture2D" uid="uid://e10sfls8cob7" path="res://art/cursor_blue.png" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://cgtbu5l52m5gk" path="res://screens/pause/pause_menu.tscn" id="3_qne8x"]
 [ext_resource type="PackedScene" uid="uid://piuow3foau7w" path="res://screens/title/title_screen.tscn" id="4_4nmqe"]
@@ -34,11 +33,7 @@ color = Color(1, 0.9411765, 1, 1)
 below_texture = ExtResource("5_4c57u")
 above_texture = ExtResource("6_efxa6")
 
-[node name="UI Layer" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="UI Layer" instance=ExtResource("2_q8oy7")]
-
-[node name="PauseMenu" parent="UI Layer" instance=ExtResource("3_qne8x")]
+[node name="PauseMenu" parent="." instance=ExtResource("3_qne8x")]
 unique_name_in_owner = true
 visible = false
 
@@ -46,5 +41,13 @@ visible = false
 unique_name_in_owner = true
 visible = false
 
-[connection signal="went_to_title" from="UI Layer/PauseMenu" to="." method="_on_pause_menu_went_to_title"]
+[node name="MouseLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="SoftwareMouse" type="Sprite2D" parent="MouseLayer"]
+unique_name_in_owner = true
+centered = false
+
+[connection signal="mouse_moved" from="World/SubViewportContainer2" to="." method="_on_mouse_moved"]
+[connection signal="went_to_title" from="PauseMenu" to="." method="_on_pause_menu_went_to_title"]
 [connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]
