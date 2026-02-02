@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://danl4o3u0qqb0"
+path="res://.godot/imported/cats and birds.wav-4123ce192f2b119fae33049ebfbd47f1.sample"
+
+[deps]
+
+source_file="res://audio/cats and birds.wav"
+dest_files=["res://.godot/imported/cats and birds.wav-4123ce192f2b119fae33049ebfbd47f1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=30
+edit/loop_end=124
+compress/mode=2

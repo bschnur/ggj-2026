@@ -61,7 +61,78 @@ func _ready() -> void:
 	init_cursor_images()
 	scale_cursor_images()
 	filter_color = FilterColor.RED
+	play_current_music_track()
 	nav_to_title()
+
+const music_starts: Array[float] = [
+	30.0,
+	0.0,
+]
+
+const music_ends: Array[float] = [
+	124.0,
+	136.0,
+]
+
+const music_fade_time := 2.0
+const music_gap := 8.0
+
+@onready var music_tracks := [
+	preload("res://audio/cats and birds.wav"),
+	preload("res://audio/music_zapsplat_game_music_mystery_underscore_airy_dark_tension_006.mp3"),
+]
+
+@onready var sounds := [
+	preload("res://audio/pop-tap-click-fx-383733.mp3"),
+]
+
+@onready var music_player = %MusicPlayer
+@onready var sound_player = %SoundPlayer
+
+var current_music_track := 0
+	
+	#var _play_duration := music_ends[current_music_track] - music_starts[current_music_track]
+	#var _timer := get_tree().create_timer(_play_duration)
+	#_timer.connect("timeout", _on_music_playback_timer_timeout)
+
+#func _on_music_playback_timer_timeout() -> void:
+	#%AudioStreamPlayer.stop()
+
+func fade_in():
+	music_player.stream = music_tracks[current_music_track]
+	music_player.volume_db = -80  # Start silent
+	music_player.play(music_starts[current_music_track])
+	var tween := get_tree().create_tween()
+	# Transition volume_db to 0 (normal volume) over the specified duration
+	tween.tween_property(music_player, "volume_db", 0.0, music_fade_time).set_trans(Tween.TRANS_SINE)
+
+func fade_out_before_end():
+	# 1. Calculate how long to wait before starting the fade
+	var current_pos = music_player.get_playback_position()
+	var time_until_fade = (music_ends[current_music_track] - current_pos) - music_fade_time
+
+	# 2. If there's time left, wait until the fade-out point
+	if time_until_fade > 0:
+		await get_tree().create_timer(time_until_fade).timeout
+
+	# 3. Create the fade-out tween
+	var tween = create_tween()
+	tween.tween_property(music_player, "volume_db", -80.0, music_fade_time)
+
+	# 4. Stop the player once the fade is complete to save resources
+	tween.finished.connect(_on_music_track_done)
+
+func _on_music_track_done() -> void:
+	music_player.stop()
+	current_music_track = (current_music_track + 1) % music_tracks.size()
+	get_tree().create_timer(music_gap).connect("timeout", _on_gap_done)
+
+func _on_gap_done() -> void:
+	play_current_music_track()
+
+func play_current_music_track() -> void:
+	fade_in()
+	fade_out_before_end()
 
 func nav_to_title() -> void:
 	hide_and_disable(world)

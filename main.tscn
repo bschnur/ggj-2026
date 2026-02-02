@@ -54,6 +54,14 @@ centered = false
 [node name="WinScreen" parent="." instance=ExtResource("9_kek77")]
 unique_name_in_owner = true
 
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Sounds"
+
 [connection signal="mask_found" from="World/SubViewportContainer2" to="." method="_on_mask_found"]
 [connection signal="went_to_title" from="PauseMenu" to="." method="_on_pause_menu_went_to_title"]
 [connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]
