@@ -16,6 +16,7 @@ func _on_mask_found() -> void:
 	masks_remaining -= 1
 	if masks_remaining == 0:
 		# YOU WIN!
+		masks_remaining = 6
 		nav_to_win_screen()
 
 enum FilterColor {
@@ -91,14 +92,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		get_tree().paused = true
 		pause_menu.show()
-	elif event.is_action_pressed("toggle_spotlight_filter"):
-		match filter_color:
-			FilterColor.NONE:
-				pass
-			FilterColor.RED:
-				filter_color = FilterColor.BLUE
-			FilterColor.BLUE:
-				filter_color = FilterColor.RED
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -108,6 +101,14 @@ func _input(event: InputEvent) -> void:
 		var mouse_pos := (event as InputEventMouseMotion).position
 		# Update the position of the software mouse.
 		%SoftwareMouse.position = mouse_pos
+	elif event.is_action_pressed("toggle_spotlight_filter"):
+		match filter_color:
+			FilterColor.NONE:
+				pass
+			FilterColor.RED:
+				filter_color = FilterColor.BLUE
+			FilterColor.BLUE:
+				filter_color = FilterColor.RED
 
 func _on_title_screen_dismissed() -> void:
 	hide_and_disable(title_screen)
