@@ -50,7 +50,7 @@ func _ready() -> void:
 	os_screen_scale = DisplayServer.screen_get_max_scale()
 	init_cursor_images()
 	scale_cursor_images()
-	filter_color = FilterColor.NONE
+	filter_color = FilterColor.RED
 	nav_to_title()
 
 func nav_to_title() -> void:
@@ -80,13 +80,20 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("toggle_spotlight_filter"):
 		match filter_color:
 			FilterColor.NONE:
-				# Temporary/debug. TODO: remove/pass
-				filter_color = FilterColor.BLUE
+				pass
 			FilterColor.RED:
 				filter_color = FilterColor.BLUE
 			FilterColor.BLUE:
 				filter_color = FilterColor.RED
-		
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		%SubViewportContainer2.update_mouse_pos()
+		# The mouse position within the 0 to size.x/y range of THIS viewport.
+		# It is the "canonical" coordinate for FRAGCOORD.
+		var mouse_pos := (event as InputEventMouseMotion).position
+		# Update the position of the software mouse.
+		%SoftwareMouse.position = mouse_pos
 
 func _on_title_screen_dismissed() -> void:
 	hide_and_disable(title_screen)

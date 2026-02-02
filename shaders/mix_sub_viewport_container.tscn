@@ -50,6 +50,7 @@ stretch = true
 script = ExtResource("1_45ekq")
 
 [node name="MixSubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1920, 1080)
@@ -228,7 +229,6 @@ texture_disabled = ExtResource("24_wa3mu")
 texture_focused = ExtResource("10_evorw")
 texture_click_mask = ExtResource("28_x1gik")
 
-[connection signal="mouse_moved" from="MixSubViewport" to="." method="_on_mix_sub_viewport_mouse_moved"]
 [connection signal="pressed" from="MixSubViewport/Blue Masks/BlueMask1" to="MixSubViewport" method="_on_blue_mask_pressed" flags=18]
 [connection signal="pressed" from="MixSubViewport/Blue Masks/BlueMask2" to="MixSubViewport" method="_on_blue_mask_pressed" flags=18]
 [connection signal="pressed" from="MixSubViewport/Blue Masks/BlueMask3" to="MixSubViewport" method="_on_blue_mask_pressed" flags=18]

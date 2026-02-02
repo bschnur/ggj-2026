@@ -30,6 +30,7 @@ grow_vertical = 2
 color = Color(1, 0.9411765, 1, 1)
 
 [node name="SubViewportContainer2" parent="World" instance=ExtResource("4_272bh")]
+unique_name_in_owner = true
 below_texture = ExtResource("5_4c57u")
 above_texture = ExtResource("6_efxa6")
 
@@ -42,12 +43,12 @@ unique_name_in_owner = true
 visible = false
 
 [node name="MouseLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 follow_viewport_enabled = true
 
 [node name="SoftwareMouse" type="Sprite2D" parent="MouseLayer"]
 unique_name_in_owner = true
 centered = false
 
-[connection signal="mouse_moved" from="World/SubViewportContainer2" to="." method="_on_mouse_moved"]
 [connection signal="went_to_title" from="PauseMenu" to="." method="_on_pause_menu_went_to_title"]
 [connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]

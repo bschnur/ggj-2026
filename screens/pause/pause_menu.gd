@@ -62,6 +62,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif current_submenu in [options_menu, quit_menu]:
 			navigate(main_menu)
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		%SubViewportContainer2.update_mouse_pos()
+		# The mouse position within the 0 to size.x/y range of THIS viewport.
+		# It is the "canonical" coordinate for FRAGCOORD.
+		var mouse_pos := (event as InputEventMouseMotion).position
+		# Update the position of the software mouse.
+		%SoftwareMouse.position = mouse_pos
+
 func navigate(submenu: Node) -> void:
 	current_submenu.hide()
 	current_submenu = submenu

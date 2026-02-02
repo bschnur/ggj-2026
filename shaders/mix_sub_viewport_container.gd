@@ -10,8 +10,6 @@ extends SubViewportContainer
 func _ready() -> void:
 	below_texture_rect.texture = below_texture
 	above_texture_rect.texture = above_texture
-
-
-signal mouse_moved(pos: Vector2)
-func _on_mix_sub_viewport_mouse_moved(pos: Vector2) -> void:
-	mouse_moved.emit(pos)
+	
+func update_mouse_pos() -> void:
+	%MixSubViewport.update_mouse_pos()
