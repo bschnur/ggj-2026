@@ -3,3 +3,5 @@
 /android/
 #art/intermediate/
 .DS_Store
+*.exe
+*.exe.zip
