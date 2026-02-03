@@ -69,7 +69,6 @@ text = "Quit"
 
 [node name="OptionsMenu" type="VBoxContainer" parent="CenterContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/separation = 60
@@ -235,12 +234,12 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 40
 
 [node name="OptionsCancel" type="Button" parent="CenterContainer/OptionsMenu/OptionsConfirmCancel"]
-custom_minimum_size = Vector2(240, 40)
+custom_minimum_size = Vector2(330, 70)
 layout_mode = 2
-text = "Cancel and discard changes"
+text = "Cancel and discard"
 
 [node name="OptionsConfirm" type="Button" parent="CenterContainer/OptionsMenu/OptionsConfirmCancel"]
-custom_minimum_size = Vector2(150, 40)
+custom_minimum_size = Vector2(280, 70)
 layout_mode = 2
 text = "Accept changes"
 
