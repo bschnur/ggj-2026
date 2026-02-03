@@ -125,5 +125,6 @@ func apply_display_settings() -> void:
 func _apply_settings() -> void:
 	apply_all_audio_volume_settings()
 	apply_display_settings()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(hide_mouse_mode)
 	
+const hide_mouse_mode := Input.MOUSE_MODE_CONFINED_HIDDEN

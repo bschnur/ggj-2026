@@ -62,7 +62,7 @@ var filter_color := FilterColor.NONE:
 			var hotspot := Vector2.ZERO
 			
 			hotspot = cursor_texture.get_size() * 0.5
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+			Input.set_mouse_mode(Settings.hide_mouse_mode)
 			set_software_mouse_cursor(cursor_texture, hotspot, true)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

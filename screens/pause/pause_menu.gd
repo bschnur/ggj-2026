@@ -152,8 +152,3 @@ signal toggled_resolution_dropdown(toggled_on: bool)
 
 func _on_resolution_dropdown_toggled(toggled_on: bool) -> void:
 	toggled_resolution_dropdown.emit(toggled_on)
-	#if toggled_on:
-		#
-		#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	#else:
-		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
