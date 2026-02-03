@@ -5,6 +5,11 @@ extends Node
 # (probably have the button emit a (self-binding) signal when clicked,
 # that is used in main.gd after a check of the filter color to do the button effects
 # 2. Address the off-by-one-pixel issue with red mask 1.
+# 3. X UI styles.
+# 3a. X Fix checkbox background issue.
+# 3b. X Style the resolution dropdown.
+# 4. X Stop scaling the cursor by OS resolution scale as if we are setting the OS mouse.
+# 5. X Set focus mode to None on all buttons (game is mouse focused anyway).
 
 var current_screen_scale := 1.0
 # Todo: also store a scalar representing the current game scale compared to 1080p.
@@ -70,7 +75,19 @@ func set_software_mouse_cursor(cursor_texture: Texture2D, hotspot: Vector2, show
 #var initialization_finished := false
 
 func _ready() -> void:
-	os_screen_scale = DisplayServer.screen_get_max_scale()
+	# Disable focus mode on all buttons.
+	# RIP accessibility but game is vision- and mouse-reliant anyhow.
+	# (I don't want to handle mirrored alternative w/o in-editor support.)
+	var all_buttons := find_children("*", "Button")
+	for b in all_buttons:
+		(b as Button).focus_mode = Control.FOCUS_NONE
+	
+	# Hack to stop scaling cursor by OS resolution scale: pretend the scale is 1.0.
+	#os_screen_scale = DisplayServer.screen_get_max_scale()
+	os_screen_scale = 1.0
+	# This leaves the relevant code available to review for other projects/purposes,
+	# without having to go find an older commit - and is a fast fix.
+	
 	init_cursor_images()
 	scale_cursor_images()
 	filter_color = FilterColor.RED

@@ -1,9 +1,65 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cngg0a3aok74u"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://cngg0a3aok74u"]
 
-[sub_resource type="SystemFont" id="SystemFont_ci82a"]
-font_names = PackedStringArray("Optima")
-font_weight = 700
+[ext_resource type="StyleBox" uid="uid://b3g3msru20e7v" path="res://themes/styleboxes/button_flat_disabled.tres" id="1_7d6gw"]
+[ext_resource type="StyleBox" uid="uid://ctxc5t3iuxob7" path="res://themes/styleboxes/button_flat_normal.tres" id="1_wykhr"]
+[ext_resource type="FontFile" uid="uid://c2fl8s2586ikd" path="res://fonts/MountainsofChristmas-Bold.ttf" id="2_78ekx"]
+[ext_resource type="StyleBox" uid="uid://1nnntq8w1x5i" path="res://themes/styleboxes/button_flat_disabled_mirrored.tres" id="2_k5u3e"]
+[ext_resource type="StyleBox" uid="uid://2lhlhmr1ti6t" path="res://themes/styleboxes/button_flat_normal_mirrored.tres" id="2_wc0q8"]
+[ext_resource type="StyleBox" uid="uid://cqusxsx6soso7" path="res://themes/styleboxes/button_flat_hover.tres" id="4_kx4sy"]
+[ext_resource type="StyleBox" uid="uid://cmvogsyry7pgk" path="res://themes/styleboxes/button_flat_hover_mirrored.tres" id="4_nuec8"]
+[ext_resource type="StyleBox" uid="uid://dngclumfexou" path="res://themes/styleboxes/button_flat_pressed.tres" id="7_10so0"]
+[ext_resource type="StyleBox" uid="uid://dhnkjs5qfhkv6" path="res://themes/styleboxes/button_flat_pressed_mirrored.tres" id="8_30s71"]
+[ext_resource type="Texture2D" uid="uid://rrpep5sbb2nu" path="res://art/ui/checked.png" id="9_30s71"]
+[ext_resource type="Texture2D" uid="uid://dh2355kpbdm5l" path="res://art/ui/unchecked.png" id="10_riwsl"]
+[ext_resource type="Texture2D" uid="uid://dnjx7b8uadvlf" path="res://art/ui/dropdown_arrow.png" id="11_7wdlx"]
+[ext_resource type="StyleBox" uid="uid://bymrbw4b58khk" path="res://themes/styleboxes/dropdown/dropdown_normal.tres" id="11_riwsl"]
+[ext_resource type="StyleBox" uid="uid://ctkrjgbssr5hc" path="res://themes/styleboxes/dropdown/popup_menu_hover.tres" id="13_a70tl"]
+[ext_resource type="StyleBox" uid="uid://bk8l1hssg7qaf" path="res://themes/styleboxes/dropdown/popup_menu_panel.tres" id="14_nmpmk"]
 
 [resource]
-default_font = SubResource("SystemFont_ci82a")
-default_font_size = 32
+default_font = ExtResource("2_78ekx")
+default_font_size = 48
+CheckBox/icons/checked = ExtResource("9_30s71")
+CheckBox/icons/unchecked = ExtResource("10_riwsl")
+FunkyButton/base_type = &"Button"
+FunkyButton/colors/font_color = Color(1, 0.9411765, 1, 1)
+FunkyButton/colors/font_focus_color = Color(1, 0.9411765, 1, 1)
+FunkyButton/colors/font_hover_color = Color(1, 0.9411765, 1, 1)
+FunkyButton/colors/font_hover_pressed_color = Color(1, 0.9411765, 1, 1)
+FunkyButton/colors/font_pressed_color = Color(1, 0.9411765, 1, 1)
+FunkyButton/styles/disabled = ExtResource("1_7d6gw")
+FunkyButton/styles/disabled_mirrored = ExtResource("2_k5u3e")
+FunkyButton/styles/hover = ExtResource("4_kx4sy")
+FunkyButton/styles/hover_mirrored = ExtResource("4_nuec8")
+FunkyButton/styles/normal = ExtResource("1_wykhr")
+FunkyButton/styles/normal_mirrored = ExtResource("2_wc0q8")
+FunkyButton/styles/pressed = ExtResource("7_10so0")
+FunkyButton/styles/pressed_mirrored = ExtResource("8_30s71")
+OptionButton/colors/font_color = Color(1, 0.9411765, 1, 1)
+OptionButton/colors/font_focus_color = Color(1, 0.9411765, 1, 1)
+OptionButton/colors/font_hover_color = Color(1, 0.9411765, 1, 1)
+OptionButton/colors/font_hover_pressed_color = Color(1, 0.9411765, 1, 1)
+OptionButton/colors/font_outline_color = Color(0.0627451, 0, 0.0627451, 1)
+OptionButton/colors/font_pressed_color = Color(1, 0.9411765, 1, 1)
+OptionButton/colors/icon_disabled_color = Color(0.0627451, 0, 0.0627451, 1)
+OptionButton/colors/icon_focus_color = Color(0.0627451, 0, 0.0627451, 1)
+OptionButton/colors/icon_hover_color = Color(0.0627451, 0, 0.0627451, 1)
+OptionButton/colors/icon_hover_pressed_color = Color(0.0627451, 0, 0.0627451, 1)
+OptionButton/colors/icon_normal_color = Color(0.0627451, 0, 0.0627451, 1)
+OptionButton/colors/icon_pressed_color = Color(0.0627451, 0, 0.0627451, 1)
+OptionButton/constants/arrow_margin = 20
+OptionButton/icons/arrow = ExtResource("11_7wdlx")
+OptionButton/styles/disabled = ExtResource("11_riwsl")
+OptionButton/styles/disabled_mirrored = ExtResource("11_riwsl")
+OptionButton/styles/focus = ExtResource("11_riwsl")
+OptionButton/styles/hover = ExtResource("11_riwsl")
+OptionButton/styles/hover_mirrored = ExtResource("11_riwsl")
+OptionButton/styles/normal = ExtResource("11_riwsl")
+OptionButton/styles/normal_mirrored = ExtResource("11_riwsl")
+OptionButton/styles/pressed = ExtResource("11_riwsl")
+OptionButton/styles/pressed_mirrored = ExtResource("11_riwsl")
+PopupMenu/colors/font_color = Color(1, 0.9411765, 1, 1)
+PopupMenu/colors/font_hover_color = Color(1, 0.9411765, 1, 1)
+PopupMenu/colors/font_separator_color = Color(1, 0.9411765, 1, 1)
+PopupMenu/styles/hover = ExtResource("13_a70tl")
+PopupMenu/styles/panel = ExtResource("14_nmpmk")

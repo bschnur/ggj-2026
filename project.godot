@@ -32,6 +32,10 @@ window/size/borderless=true
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
+[gui]
+
+theme/custom="uid://cngg0a3aok74u"
+
 [input]
 
 ui_cancel={

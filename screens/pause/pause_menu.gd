@@ -145,3 +145,10 @@ func _on_credits_button_pressed() -> void:
 
 func _on_credits_back_button_pressed() -> void:
 	navigate(main_menu)
+
+
+func _on_resolution_dropdown_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
