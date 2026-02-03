@@ -1,0 +1,267 @@
+[gd_scene load_steps=37 format=3 uid="uid://dsgsdo7hv78jk"]
+
+[ext_resource type="Script" uid="uid://b5r64h52rjlqa" path="res://shaders/mix_sub_viewport_container.gd" id="1_dhol3"]
+[ext_resource type="Script" uid="uid://bnepofwngvgvk" path="res://shaders/mix_subviewport.gd" id="2_wgmwr"]
+[ext_resource type="Shader" uid="uid://c3p0gmtki8c11" path="res://shaders/mix_below.gdshader" id="3_d2ikq"]
+[ext_resource type="Texture2D" uid="uid://dp2n4bf4gylhn" path="res://art/title/title_blue.png" id="4_wy8ii"]
+[ext_resource type="Shader" uid="uid://daulp304uph6n" path="res://shaders/mix_mask_blue.gdshader" id="5_n0uc4"]
+[ext_resource type="Texture2D" uid="uid://cgmbngsr77wce" path="res://art/title/beak_closed_blue.png" id="6_q2isk"]
+[ext_resource type="Texture2D" uid="uid://ctry5atn21lyi" path="res://art/title/beak_open_blue.png" id="7_lmo7c"]
+[ext_resource type="Texture2D" uid="uid://0j1jvl046ylh" path="res://art/title/claw_blue.png" id="8_bokv7"]
+[ext_resource type="Texture2D" uid="uid://drantv52wn5i0" path="res://art/title/paw_blue.png" id="9_dhol3"]
+[ext_resource type="Texture2D" uid="uid://dtw2cwc68jdv3" path="res://art/title/snoot_blue.png" id="10_wgmwr"]
+[ext_resource type="Texture2D" uid="uid://bb7ag8m5mc61w" path="res://art/title/fang_blue.png" id="11_d2ikq"]
+[ext_resource type="Texture2D" uid="uid://bxdsti5ji4btm" path="res://art/title/talon_blue.png" id="12_wy8ii"]
+[ext_resource type="Texture2D" uid="uid://bttqpuf5y7ug1" path="res://art/title/foot_blue.png" id="13_n0uc4"]
+[ext_resource type="Shader" uid="uid://ba827y65qbgu1" path="res://shaders/mix_above.gdshader" id="16_hqgll"]
+[ext_resource type="Texture2D" uid="uid://bhbq01kkpe4t8" path="res://art/title/beak_open_red.png" id="17_bvftw"]
+[ext_resource type="Texture2D" uid="uid://dr77xchy8ul0r" path="res://art/title/title_red.png" id="17_kcm50"]
+[ext_resource type="Texture2D" uid="uid://bcxfwmv8ehp4s" path="res://art/title/beak_closed_red.png" id="18_p6gw4"]
+[ext_resource type="Shader" uid="uid://ccimq8iy7ypt2" path="res://shaders/mix_mask_red.gdshader" id="18_s6vf6"]
+[ext_resource type="Texture2D" uid="uid://ij01ay66amj3" path="res://art/title/paw_red.png" id="19_jkolq"]
+[ext_resource type="Texture2D" uid="uid://cbrltyux71cws" path="res://art/title/claw_red.png" id="20_nal6e"]
+[ext_resource type="Texture2D" uid="uid://bpdn23g347t82" path="res://art/title/fang_red.png" id="21_aqh3p"]
+[ext_resource type="Texture2D" uid="uid://chsksm83u7c1x" path="res://art/title/snoot_red.png" id="22_d8nqm"]
+[ext_resource type="Texture2D" uid="uid://b0kb1q6rgvhbs" path="res://art/title/foot_red.png" id="23_fj1km"]
+[ext_resource type="Texture2D" uid="uid://bs3kfqpyn1jdq" path="res://art/title/talon_red.png" id="24_x250p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpml5"]
+shader = ExtResource("3_d2ikq")
+shader_parameter/color_id = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2isk"]
+resource_local_to_scene = true
+shader = ExtResource("5_n0uc4")
+shader_parameter/color_id = 1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4x54s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_q2isk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lmo7c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqgll"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_bokv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_dhol3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kcm50"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_wgmwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_d2ikq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s6vf6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_wy8ii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_n0uc4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
+shader = ExtResource("16_hqgll")
+shader_parameter/color_id = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ws2qx"]
+resource_local_to_scene = true
+shader = ExtResource("18_s6vf6")
+shader_parameter/color_id = 2
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5gw74"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_bvftw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_p6gw4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5len6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_jkolq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_nal6e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a41a5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_aqh3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_d8nqm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tdxtd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_fj1km")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_x250p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("1_dhol3")
+
+[node name="MixSubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+script = ExtResource("2_wgmwr")
+
+[node name="BelowTextureRect" type="TextureRect" parent="MixSubViewport"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_tpml5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_wy8ii")
+
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="MixSubViewport"]
+copy_mode = 2
+
+[node name="Blue Anims" type="Node2D" parent="MixSubViewport"]
+
+[node name="Beak Blue" type="AnimatedSprite2D" parent="MixSubViewport/Blue Anims"]
+material = SubResource("ShaderMaterial_q2isk")
+position = Vector2(135, 751)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4x54s")
+autoplay = "default"
+
+[node name="Claw Blue" type="AnimatedSprite2D" parent="MixSubViewport/Blue Anims"]
+material = SubResource("ShaderMaterial_q2isk")
+position = Vector2(126, 340)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_hqgll")
+autoplay = "default"
+
+[node name="Fang Blue" type="AnimatedSprite2D" parent="MixSubViewport/Blue Anims"]
+material = SubResource("ShaderMaterial_q2isk")
+position = Vector2(1737, 733)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_kcm50")
+autoplay = "default"
+flip_h = true
+
+[node name="Talon Blue" type="AnimatedSprite2D" parent="MixSubViewport/Blue Anims"]
+material = SubResource("ShaderMaterial_q2isk")
+position = Vector2(1809, 327)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_s6vf6")
+autoplay = "default"
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="MixSubViewport"]
+copy_mode = 2
+
+[node name="AboveTextureRect" type="TextureRect" parent="MixSubViewport"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_hafda")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_kcm50")
+
+[node name="BackBufferCopy3" type="BackBufferCopy" parent="MixSubViewport"]
+copy_mode = 2
+
+[node name="Red Anims" type="Node2D" parent="MixSubViewport"]
+
+[node name="Beak Red" type="AnimatedSprite2D" parent="MixSubViewport/Red Anims"]
+material = SubResource("ShaderMaterial_ws2qx")
+position = Vector2(135, 751)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5gw74")
+autoplay = "default"
+
+[node name="Claw Red" type="AnimatedSprite2D" parent="MixSubViewport/Red Anims"]
+material = SubResource("ShaderMaterial_ws2qx")
+position = Vector2(126, 340)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5len6")
+autoplay = "default"
+
+[node name="Fang Red" type="AnimatedSprite2D" parent="MixSubViewport/Red Anims"]
+material = SubResource("ShaderMaterial_ws2qx")
+position = Vector2(1737, 733)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_a41a5")
+autoplay = "default"
+flip_h = true
+
+[node name="Talon Red" type="AnimatedSprite2D" parent="MixSubViewport/Red Anims"]
+material = SubResource("ShaderMaterial_ws2qx")
+position = Vector2(1809, 327)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_tdxtd")
+autoplay = "default"
+
+[connection signal="mask_found" from="MixSubViewport" to="." method="_on_mix_sub_viewport_mask_found"]

@@ -1,138 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://piuow3foau7w"]
+[gd_scene load_steps=6 format=3 uid="uid://piuow3foau7w"]
 
 [ext_resource type="Script" uid="uid://dkqoof37cqsam" path="res://screens/title/title_screen.gd" id="1_ig5kc"]
-[ext_resource type="PackedScene" uid="uid://dqbrmx3p3v5wa" path="res://shaders/mix_sub_viewport_container.tscn" id="2_pefg2"]
+[ext_resource type="PackedScene" uid="uid://dsgsdo7hv78jk" path="res://shaders/title_sub_viewport_container.tscn" id="2_p6rma"]
 [ext_resource type="Texture2D" uid="uid://dp2n4bf4gylhn" path="res://art/title/title_blue.png" id="3_42e70"]
 [ext_resource type="Texture2D" uid="uid://dr77xchy8ul0r" path="res://art/title/title_red.png" id="4_6usmv"]
 [ext_resource type="FontFile" uid="uid://uu4p6cej0mny" path="res://fonts/MountainsofChristmas-Regular.ttf" id="5_6usmv"]
-[ext_resource type="Texture2D" uid="uid://cgmbngsr77wce" path="res://art/title/beak_closed_blue.png" id="6_n46co"]
-[ext_resource type="Texture2D" uid="uid://ctry5atn21lyi" path="res://art/title/beak_open_blue.png" id="7_w8si6"]
-[ext_resource type="Texture2D" uid="uid://bhbq01kkpe4t8" path="res://art/title/beak_open_red.png" id="8_br6kq"]
-[ext_resource type="Texture2D" uid="uid://bcxfwmv8ehp4s" path="res://art/title/beak_closed_red.png" id="9_cwhhr"]
-[ext_resource type="Texture2D" uid="uid://dtw2cwc68jdv3" path="res://art/title/snoot_blue.png" id="10_30d6y"]
-[ext_resource type="Texture2D" uid="uid://bb7ag8m5mc61w" path="res://art/title/fang_blue.png" id="11_rvplc"]
-[ext_resource type="Texture2D" uid="uid://bpdn23g347t82" path="res://art/title/fang_red.png" id="12_067or"]
-[ext_resource type="Texture2D" uid="uid://chsksm83u7c1x" path="res://art/title/snoot_red.png" id="13_dke8y"]
-[ext_resource type="Texture2D" uid="uid://0j1jvl046ylh" path="res://art/title/claw_blue.png" id="14_xd27j"]
-[ext_resource type="Texture2D" uid="uid://drantv52wn5i0" path="res://art/title/paw_blue.png" id="15_xuajr"]
-[ext_resource type="Texture2D" uid="uid://ij01ay66amj3" path="res://art/title/paw_red.png" id="16_xf5ta"]
-[ext_resource type="Texture2D" uid="uid://cbrltyux71cws" path="res://art/title/claw_red.png" id="17_rm3nc"]
-[ext_resource type="Texture2D" uid="uid://bxdsti5ji4btm" path="res://art/title/talon_blue.png" id="18_ksvuj"]
-[ext_resource type="Texture2D" uid="uid://bttqpuf5y7ug1" path="res://art/title/foot_blue.png" id="19_veoxd"]
-[ext_resource type="Texture2D" uid="uid://b0kb1q6rgvhbs" path="res://art/title/foot_red.png" id="20_2dexa"]
-[ext_resource type="Texture2D" uid="uid://bs3kfqpyn1jdq" path="res://art/title/talon_red.png" id="21_43uvx"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_n46co"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_n46co")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_w8si6")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_w8si6"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_br6kq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_cwhhr")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_br6kq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("14_xd27j")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_xuajr")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_cwhhr"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("16_xf5ta")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_rm3nc")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_30d6y"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_30d6y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_rvplc")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rvplc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_067or")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_dke8y")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_067or"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("18_ksvuj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_veoxd")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_dke8y"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("20_2dexa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_43uvx")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
 
 [node name="TitleScreen" type="CanvasLayer"]
 script = ExtResource("1_ig5kc")
@@ -145,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.9411765, 1, 1)
 
-[node name="SubViewportContainer" parent="." instance=ExtResource("2_pefg2")]
+[node name="SubViewportContainer" parent="." instance=ExtResource("2_p6rma")]
 below_texture = ExtResource("3_42e70")
 above_texture = ExtResource("4_6usmv")
 
@@ -165,53 +37,3 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_6usmv")
 theme_override_font_sizes/font_size = 64
 text = "Press the spacebar"
-
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(135, 751)
-scale = Vector2(2, 2)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
-sprite_frames = SubResource("SpriteFrames_n46co")
-autoplay = "default"
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Node2D"]
-sprite_frames = SubResource("SpriteFrames_w8si6")
-autoplay = "default"
-
-[node name="Node2D2" type="Node2D" parent="."]
-position = Vector2(126, 340)
-scale = Vector2(2, 2)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D2"]
-sprite_frames = SubResource("SpriteFrames_br6kq")
-autoplay = "default"
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Node2D2"]
-sprite_frames = SubResource("SpriteFrames_cwhhr")
-autoplay = "default"
-
-[node name="Node2D3" type="Node2D" parent="."]
-position = Vector2(1737, 733)
-scale = Vector2(2, 2)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D3"]
-sprite_frames = SubResource("SpriteFrames_30d6y")
-autoplay = "default"
-flip_h = true
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Node2D3"]
-sprite_frames = SubResource("SpriteFrames_rvplc")
-autoplay = "default"
-flip_h = true
-
-[node name="Node2D4" type="Node2D" parent="."]
-position = Vector2(1809, 327)
-scale = Vector2(2, 2)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D4"]
-sprite_frames = SubResource("SpriteFrames_067or")
-autoplay = "default"
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Node2D4"]
-sprite_frames = SubResource("SpriteFrames_dke8y")
-autoplay = "default"
