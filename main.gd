@@ -5,8 +5,7 @@ class_name Main
 
 # 1. Scale cursor based on window/viewport width/height (relevant todo below).
 # 2. Make window draggable when not in fullscreen.
-# 3. Make sure the fullscreen setting is respected on subsequent launch.
-# 4. Address the issue of low resolution keyhole syndrome
+# 3. Address the issue of low resolution keyhole syndrome
 # 		(maybe involves minimum sizes, anchors, or stretch?).
 
 var current_screen_scale := 1.0

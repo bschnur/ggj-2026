@@ -37,9 +37,11 @@ var screen_resolutions: Dictionary[String, int] = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# TODO: connect to settings loaded signal; move all initialization based on Settings values/methods into the function subsequently called.
+	Settings.settings_loaded.connect(init_settings_values)
 	init_visibility()
 	init_resolution_values()
-	init_settings_values()
+	#init_settings_values()
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 func init_visibility() -> void:

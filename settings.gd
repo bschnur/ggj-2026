@@ -34,10 +34,20 @@ var bus_to_bus_name_map := {
 var fullscreen_enabled := true
 var screen_resolution := "1920x1080"
 
-# Called when the node enters the scene tree for the first time.
+signal settings_loaded
+
 func _ready() -> void:
 	_load_settings()
+	get_tree().process_frame.connect(_on_first_frame, CONNECT_ONE_SHOT)
+
+func _on_first_frame() -> void:
+	if not fullscreen_enabled:
+		# Toggle a different mode first to 'wake up' the window manager
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+		await get_tree().process_frame
 	_apply_settings()
+	# Signal to pause menu that it can safely initialize its controls.
+	settings_loaded.emit()
 
 func save_and_apply() -> void:
 	_apply_settings()
