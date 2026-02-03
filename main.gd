@@ -3,6 +3,7 @@ class_name Main
 
 # TODO:
 # 1. Address the off-by-one-pixel issue with red mask 1.
+# 2. Scale to different resolutions better.
 
 var current_screen_scale := 1.0
 # Todo: also store a scalar representing the current game scale compared to 1080p.

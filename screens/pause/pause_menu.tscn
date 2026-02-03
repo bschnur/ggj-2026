@@ -312,7 +312,7 @@ horizontal_alignment = 1
 [node name="Label3" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
-text = "Code & Implementation"
+text = "Concept Art"
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
