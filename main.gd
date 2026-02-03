@@ -2,7 +2,16 @@ extends Node
 class_name Main
 
 # TODO:
-# Scale to different resolutions better.
+# Handle display settings better:
+# 1. X Center window on screen when changing to windowed mode.
+# 2. Make window draggable when not in fullscreen.
+# 3. Make fullscreen and resolution settings apply correctly regardless of the
+# 		combination in which they are selected and applied.
+# 4a. Make sure the fullscreen setting is respected on subsequent launch.
+# 4b. When loading fresh, don't draw the weird crazy background outside the viewport
+#		(check we set mode on load based on settings).
+# 5. Address the issue of low resolution keyhole syndrome
+# 		(maybe involves minimum sizes, anchors, or stretch?).
 
 var current_screen_scale := 1.0
 # Todo: also store a scalar representing the current game scale compared to 1080p.

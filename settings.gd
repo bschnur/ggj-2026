@@ -94,6 +94,7 @@ func apply_display_settings() -> void:
 		var new_fullscreen_mode: DisplayServer.WindowMode
 		if fullscreen_actually_enabled:
 			new_fullscreen_mode = DisplayServer.WINDOW_MODE_WINDOWED
+			get_window().call_deferred("move_to_center")
 		else:
 			new_fullscreen_mode = DisplayServer.WINDOW_MODE_FULLSCREEN
 		DisplayServer.window_set_mode(new_fullscreen_mode)
