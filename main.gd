@@ -1,5 +1,11 @@
 extends Node
 
+# TODO:
+# 1. Make masks clickable only when non-matching lens color is selected
+# (probably have the button emit a (self-binding) signal when clicked,
+# that is used in main.gd after a check of the filter color to do the button effects
+# 2. Address the off-by-one-pixel issue with red mask 1.
+
 var current_screen_scale := 1.0
 # Todo: also store a scalar representing the current game scale compared to 1080p.
 # This should be used to resize the mouse cursor images - and change the filter radius!
