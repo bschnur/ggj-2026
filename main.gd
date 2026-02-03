@@ -5,7 +5,9 @@ class_name Main
 
 # 1. Scale cursor based on window/viewport width/height (relevant todo below).
 # 2. X Make window draggable when not in fullscreen.
-# 2a. Add screen clamping.
+# 2a. X Fixed: incorrect mouse mode state handling when lens color toggled during window drag.
+# 2b. X Minor refactor to avoid direct reference to specific mouse modes in main logic.
+# 2c. Add screen clamping. Account for multiple monitors and subsequent software mouse position. (Latter may take care of itself.)
 # 3. Address the issue of low resolution keyhole syndrome
 # 		(maybe involves minimum sizes, anchors, or stretch?).
 
@@ -56,21 +58,24 @@ var filter_color := FilterColor.NONE:
 		# Todo: the below would probably be better to set on detected display DPI change - but *shrug* it's a 48h jam.
 		if os_screen_scale != current_screen_scale:
 			scale_cursor_images()
-		filter_color = value
 		
-		if filter_color != FilterColor.NONE:
-			var cursor_texture := filter_cursor_textures[filter_color]
-			var hotspot := Vector2.ZERO
+		if value != FilterColor.NONE:
+			# Should stash prev mouse mode in drag, and if dragging, update that instead.
+			if is_dragging_mouse:
+				drag_stashed_mouse_mode = Settings.hide_os_mouse_mode
+			else:
+				Input.set_mouse_mode(Settings.hide_os_mouse_mode)
 			
-			hotspot = cursor_texture.get_size() * 0.5
-			Input.set_mouse_mode(Settings.hide_mouse_mode)
+			var cursor_texture := filter_cursor_textures[value]
+			var hotspot := cursor_texture.get_size() * 0.5
 			set_software_mouse_cursor(cursor_texture, hotspot, true)
 		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			Input.set_mouse_mode(Settings.show_os_mouse_mode)
 			hide_software_mouse_cursor()
 			#Input.set_custom_mouse_cursor(cursor_img, Input.CURSOR_ARROW, hotspot)
 		
-		RenderingServer.global_shader_parameter_set("mouse_lens_color_id", filter_color)
+		RenderingServer.global_shader_parameter_set("mouse_lens_color_id", value)
+		filter_color = value
 
 var stashed_filter_color: FilterColor
 
@@ -86,8 +91,6 @@ func show_software_mouse_cursor() -> void:
 
 func hide_software_mouse_cursor() -> void:
 	software_mouse.hide()
-
-#var initialization_finished := false
 
 func _ready() -> void:
 	# Disable focus mode on all buttons.
@@ -108,7 +111,6 @@ func _ready() -> void:
 	filter_color = FilterColor.RED
 	play_current_music_track()
 	nav_to_title()
-	#initialization_finished = true
 
 const music_starts: Array[float] = [
 	30.0,
@@ -201,13 +203,13 @@ func scale_cursor_images() -> void:
 		current_screen_scale = os_screen_scale
 
 func _unhandled_input(event: InputEvent) -> void:
-	#if initialization_finished:
 	if event.is_action_pressed("pause"):
 		get_tree().paused = true
 		pause_menu.show()
 
 var is_dragging_mouse := false
 var stashed_mouse_offset_from_center: Vector2
+var drag_stashed_mouse_mode: Input.MouseMode
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -232,11 +234,12 @@ func _input(event: InputEvent) -> void:
 				filter_color = FilterColor.RED
 	elif event.is_action_pressed("snag_item"):
 		is_dragging_mouse = true
+		drag_stashed_mouse_mode = Input.mouse_mode
+		Input.mouse_mode = Settings.drag_mouse_mode
 		stashed_mouse_offset_from_center = software_mouse.position - get_window_center()
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif event.is_action_released("snag_item"):
 		is_dragging_mouse = false
-		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+		Input.mouse_mode = drag_stashed_mouse_mode
 		var final_local_pos := get_window_center() + stashed_mouse_offset_from_center
 		get_viewport().warp_mouse(final_local_pos)
 
