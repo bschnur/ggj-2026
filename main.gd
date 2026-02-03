@@ -2,19 +2,15 @@ extends Node
 class_name Main
 
 # TODO:
-# Handle display settings better:
-# 1. X Center window on screen when changing to windowed mode.
+
+# 1. Scale cursor based on window/viewport width/height (relevant todo below).
 # 2. Make window draggable when not in fullscreen.
-# 3. Make fullscreen and resolution settings apply correctly regardless of the
-# 		combination in which they are selected and applied.
-# 4a. Make sure the fullscreen setting is respected on subsequent launch.
-# 4b. When loading fresh, don't draw the weird crazy background outside the viewport
-#		(check we set mode on load based on settings).
-# 5. Address the issue of low resolution keyhole syndrome
+# 3. Make sure the fullscreen setting is respected on subsequent launch.
+# 4. Address the issue of low resolution keyhole syndrome
 # 		(maybe involves minimum sizes, anchors, or stretch?).
 
 var current_screen_scale := 1.0
-# Todo: also store a scalar representing the current game scale compared to 1080p.
+# TODO: also store a scalar representing the current game scale compared to 1080p.
 # This should be used to resize the mouse cursor images - and change the filter radius!
 var os_screen_scale: float
 
@@ -22,6 +18,10 @@ var os_screen_scale: float
 @onready var pause_menu := %PauseMenu
 @onready var world := %World
 @onready var win_screen := %WinScreen
+
+@onready var software_mouse := %SoftwareMouse
+
+@onready var world_blend_viewport := %SubViewportContainer2
 
 var masks_remaining := 6
 
@@ -36,7 +36,7 @@ func _on_mask_found() -> void:
 	if masks_remaining == 0:
 		# YOU WIN!
 		masks_remaining = 6
-		%SubViewportContainer2.reset_masks()
+		world_blend_viewport.reset_masks()
 		nav_to_win_screen()
 
 func play_boop():
@@ -67,17 +67,25 @@ var filter_color := FilterColor.NONE:
 			set_software_mouse_cursor(cursor_texture, hotspot, true)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			hide_software_mouse_cursor()
 			#Input.set_custom_mouse_cursor(cursor_img, Input.CURSOR_ARROW, hotspot)
 		
 		RenderingServer.global_shader_parameter_set("mouse_lens_color_id", filter_color)
 
+var stashed_filter_color: FilterColor
+
 func set_software_mouse_cursor(cursor_texture: Texture2D, hotspot: Vector2, show := true) -> void:
 	#var shape := Input.CURSOR_ARROW
-	var s_mouse := %SoftwareMouse
-	s_mouse.texture = cursor_texture
-	s_mouse.offset = -hotspot
+	software_mouse.texture = cursor_texture
+	software_mouse.offset = -hotspot
 	if show:
-		s_mouse.show()
+		show_software_mouse_cursor()
+
+func show_software_mouse_cursor() -> void:
+	software_mouse.show()
+
+func hide_software_mouse_cursor() -> void:
+	software_mouse.hide()
 
 #var initialization_finished := false
 
@@ -200,12 +208,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		%SubViewportContainer2.update_mouse_pos()
+		world_blend_viewport.update_mouse_pos()
 		# The mouse position within the 0 to size.x/y range of THIS viewport.
 		# It is the "canonical" coordinate for FRAGCOORD.
 		var mouse_pos := (event as InputEventMouseMotion).position
 		# Update the position of the software mouse.
-		%SoftwareMouse.position = mouse_pos
+		software_mouse.position = mouse_pos
 	elif event.is_action_pressed("toggle_spotlight_filter"):
 		match filter_color:
 			FilterColor.NONE:
@@ -234,7 +242,7 @@ func hide_and_disable(n: Node) -> void:
 
 
 func _on_mouse_moved(pos: Vector2) -> void:
-	%SoftwareMouse.position = pos
+	software_mouse.position = pos
 
 
 func _on_win_screen_dismissed() -> void:
@@ -243,3 +251,11 @@ func _on_win_screen_dismissed() -> void:
 
 func _on_pause_menu_boop_required() -> void:
 	play_boop()
+
+
+func _on_pause_menu_toggled_resolution_dropdown(toggled_on: bool) -> void:
+	if toggled_on:
+		stashed_filter_color = filter_color
+		filter_color = FilterColor.NONE
+	else:
+		filter_color = stashed_filter_color

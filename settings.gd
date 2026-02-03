@@ -88,28 +88,32 @@ func apply_all_audio_volume_settings() -> void:
 		apply_audio_bus_volume_setting(bus)
 
 func apply_display_settings() -> void:
-	var fullscreen_actually_enabled = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	var current_window_mode := DisplayServer.window_get_mode()
+	var target_window_mode := DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen_enabled else DisplayServer.WINDOW_MODE_WINDOWED
 	
-	if fullscreen_enabled != fullscreen_actually_enabled:
-		var new_fullscreen_mode: DisplayServer.WindowMode
-		if fullscreen_actually_enabled:
-			new_fullscreen_mode = DisplayServer.WINDOW_MODE_WINDOWED
-			get_window().call_deferred("move_to_center")
-		else:
-			new_fullscreen_mode = DisplayServer.WINDOW_MODE_FULLSCREEN
-		DisplayServer.window_set_mode(new_fullscreen_mode)
-	
-	var actual_screen_resolution := get_viewport().get_visible_rect().size
+	if current_window_mode != target_window_mode:
+		DisplayServer.window_set_mode(target_window_mode)
+		# Wait for the OS to finish the transition
+		await get_tree().process_frame
 	
 	var res_arr := screen_resolution.split("x")
-	var res_vec := Vector2(float(res_arr[0]), float(res_arr[1]))
+	var res_vec := Vector2i(int(res_arr[0]), int(res_arr[1]))
 	
-	if res_vec != actual_screen_resolution:
-		get_window().content_scale_size = res_vec
-		if not fullscreen_enabled:
-			get_window().size = res_vec
+	get_window().content_scale_size = res_vec
+	
+	if not fullscreen_enabled:
+		DisplayServer.window_set_size(res_vec)
+		# Wait for the OS to finish the transition
+		await get_tree().process_frame
+		# Manual Center Calculation - more reliable than move_to_center()
+		var screen := DisplayServer.window_get_current_screen()
+		var screen_rect := DisplayServer.screen_get_usable_rect(screen)
+		var window_size := DisplayServer.window_get_size()
+		var center_pos := screen_rect.position + (screen_rect.size / 2) - (window_size / 2)
+		DisplayServer.window_set_position(center_pos)
 
 func _apply_settings() -> void:
 	apply_all_audio_volume_settings()
 	apply_display_settings()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
