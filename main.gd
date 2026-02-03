@@ -205,14 +205,23 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().paused = true
 		pause_menu.show()
 
+var is_dragging_mouse := false
+var mouse_drag_start_pos: Vector2
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		world_blend_viewport.update_mouse_pos()
-		# The mouse position within the 0 to size.x/y range of THIS viewport.
-		# It is the "canonical" coordinate for FRAGCOORD.
-		var mouse_pos := (event as InputEventMouseMotion).position
-		# Update the position of the software mouse.
-		software_mouse.position = mouse_pos
+		if is_dragging_mouse:
+			var current_window_pos := DisplayServer.window_get_position()
+			var drag_delta := get_viewport().get_mouse_position() - mouse_drag_start_pos
+			DisplayServer.window_set_position(current_window_pos + Vector2i(drag_delta))
+		else:
+			# TODO: ensure we don't need to hit this branch (ie the spotlight and software mouse work fine) while dragging window.
+			world_blend_viewport.update_mouse_pos()
+			# The mouse position within the 0 to size.x/y range of THIS viewport.
+			# It is the "canonical" coordinate for FRAGCOORD.
+			var mouse_pos := (event as InputEventMouseMotion).position
+			# Update the position of the software mouse.
+			software_mouse.position = mouse_pos
 	elif event.is_action_pressed("toggle_spotlight_filter"):
 		match filter_color:
 			FilterColor.NONE:
@@ -221,6 +230,13 @@ func _input(event: InputEvent) -> void:
 				filter_color = FilterColor.BLUE
 			FilterColor.BLUE:
 				filter_color = FilterColor.RED
+	elif event.is_action_pressed("snag_item"):
+		is_dragging_mouse = true
+		#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		mouse_drag_start_pos = get_viewport().get_mouse_position()
+	elif event.is_action_released("snag_item"):
+		is_dragging_mouse = false
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
 func _on_title_screen_dismissed() -> void:
 	hide_and_disable(title_screen)
