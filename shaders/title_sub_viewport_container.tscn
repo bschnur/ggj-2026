@@ -263,5 +263,3 @@ position = Vector2(1809, 327)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_tdxtd")
 autoplay = "default"
-
-[connection signal="mask_found" from="MixSubViewport" to="." method="_on_mix_sub_viewport_mask_found"]

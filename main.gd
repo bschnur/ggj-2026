@@ -1,15 +1,8 @@
 extends Node
+class_name Main
 
 # TODO:
-# 1. Make masks clickable only when non-matching lens color is selected
-# (probably have the button emit a (self-binding) signal when clicked,
-# that is used in main.gd after a check of the filter color to do the button effects
-# 2. Address the off-by-one-pixel issue with red mask 1.
-# 3. X UI styles.
-# 3a. X Fix checkbox background issue.
-# 3b. X Style the resolution dropdown.
-# 4. X Stop scaling the cursor by OS resolution scale as if we are setting the OS mouse.
-# 5. X Set focus mode to None on all buttons (game is mouse focused anyway).
+# 1. Address the off-by-one-pixel issue with red mask 1.
 
 var current_screen_scale := 1.0
 # Todo: also store a scalar representing the current game scale compared to 1080p.
@@ -22,6 +15,11 @@ var os_screen_scale: float
 @onready var win_screen := %WinScreen
 
 var masks_remaining := 6
+
+func _on_mask_location_clicked(btn: BaseButton, col: int) -> void:
+	if col != filter_color:
+		btn.set_deferred("disabled", true)
+		_on_mask_found()
 
 func _on_mask_found() -> void:
 	masks_remaining -= 1

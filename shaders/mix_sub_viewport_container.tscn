@@ -234,7 +234,7 @@ texture_disabled = ExtResource("24_wa3mu")
 texture_focused = ExtResource("10_evorw")
 texture_click_mask = ExtResource("28_x1gik")
 
-[connection signal="mask_found" from="MixSubViewport" to="." method="_on_mix_sub_viewport_mask_found"]
+[connection signal="mask_location_clicked" from="MixSubViewport" to="." method="_on_mix_sub_viewport_mask_location_clicked"]
 [connection signal="pressed" from="MixSubViewport/Blue Masks/BlueMask1" to="MixSubViewport" method="_on_blue_mask_pressed" flags=18]
 [connection signal="pressed" from="MixSubViewport/Blue Masks/BlueMask2" to="MixSubViewport" method="_on_blue_mask_pressed" flags=18]
 [connection signal="pressed" from="MixSubViewport/Blue Masks/BlueMask3" to="MixSubViewport" method="_on_blue_mask_pressed" flags=18]

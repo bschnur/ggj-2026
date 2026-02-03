@@ -7,14 +7,13 @@ func update_mouse_pos() -> void:
 	# Update the mouse position Global Shader Parameter.
 	RenderingServer.global_shader_parameter_set("mouse_pos", local_mouse)
 
-signal mask_found
+signal mask_location_clicked(btn: BaseButton, col: Main.FilterColor)
 
-func _on_blue_mask_pressed(source: BaseButton) -> void:
-	_on_mask_button_pressed(source)
+func _on_blue_mask_pressed(btn: BaseButton) -> void:
+	_on_mask_button_pressed(btn, Main.FilterColor.BLUE)
 
-func _on_red_mask_pressed(source: BaseButton) -> void:
-	_on_mask_button_pressed(source)
+func _on_red_mask_pressed(btn: BaseButton) -> void:
+	_on_mask_button_pressed(btn, Main.FilterColor.RED)
 
-func _on_mask_button_pressed(source: BaseButton) -> void:
-	source.set_deferred("disabled", true)
-	mask_found.emit()
+func _on_mask_button_pressed(btn: BaseButton, color: Main.FilterColor) -> void:
+	mask_location_clicked.emit(btn, color)

@@ -66,7 +66,7 @@ stream = ExtResource("10_4c57u")
 max_polyphony = 5
 bus = &"Sounds"
 
-[connection signal="mask_found" from="World/SubViewportContainer2" to="." method="_on_mask_found"]
+[connection signal="mask_location_clicked" from="World/SubViewportContainer2" to="." method="_on_mask_location_clicked"]
 [connection signal="boop_required" from="PauseMenu" to="." method="_on_pause_menu_boop_required"]
 [connection signal="went_to_title" from="PauseMenu" to="." method="_on_pause_menu_went_to_title"]
 [connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]
