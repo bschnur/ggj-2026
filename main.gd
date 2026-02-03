@@ -18,6 +18,7 @@ func _on_mask_found() -> void:
 	if masks_remaining == 0:
 		# YOU WIN!
 		masks_remaining = 6
+		%SubViewportContainer2.reset_masks()
 		nav_to_win_screen()
 
 func play_boop():
