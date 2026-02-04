@@ -70,5 +70,8 @@ bus = &"Sounds"
 [connection signal="boop_required" from="PauseMenu" to="." method="_on_pause_menu_boop_required"]
 [connection signal="toggled_resolution_dropdown" from="PauseMenu" to="." method="_on_pause_menu_toggled_resolution_dropdown"]
 [connection signal="went_to_title" from="PauseMenu" to="." method="_on_pause_menu_went_to_title"]
+[connection signal="window_drag_block_should_clear" from="PauseMenu" to="." method="_on_window_drag_block_should_clear"]
+[connection signal="window_drag_block_should_decrement" from="PauseMenu" to="." method="_on_window_drag_block_should_decrement"]
+[connection signal="window_drag_block_should_increment" from="PauseMenu" to="." method="_on_window_drag_block_should_increment"]
 [connection signal="dismissed" from="TitleScreen" to="." method="_on_title_screen_dismissed"]
 [connection signal="dismissed" from="WinScreen" to="." method="_on_win_screen_dismissed"]

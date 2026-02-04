@@ -91,6 +91,7 @@ func navigate(submenu: Node) -> void:
 
 func unpause() -> void:
 	init_visibility()
+	window_drag_block_should_clear.emit()
 	current_submenu = main_menu
 	get_tree().paused = false
 
@@ -107,24 +108,18 @@ func _on_options_cancel_pressed() -> void:
 	# Todo: prompt user whether to discard changes, if there are any
 	navigate(main_menu)
 
-signal boop_required
-func _on_options_confirm_pressed() -> void:
-	apply_display_settings()
-	save_all_settings()
-	# Play confirmation sound (handled by main.gd).
-	boop_required.emit()
-	navigate(main_menu)
+func get_selected_resolution() -> Vector2i:
+	var res_id: int = resolution_dropdown.get_item_id(resolution_dropdown.selected)
+	var res_arr = screen_resolutions.find_key(res_id).split("x")
+	return Vector2i(int(res_arr[0]), int(res_arr[1]))
 
-func _on_slider_drag_ended(value_changed: bool, source: Slider) -> void:
-	if value_changed:
-		Settings.set_and_apply_audio_volume(slider_to_bus_map[source], source.value)
-	if source == sounds_slider:
-		boop_required.emit()
+func get_fullscreen_state() -> bool:
+	return fullscreen_check_box.button_pressed
 
-func apply_display_settings() -> void:
+func set_display_settings() -> void:
 	var res_id: int = resolution_dropdown.get_item_id(resolution_dropdown.selected)
 	Settings.screen_resolution = screen_resolutions.find_key(res_id)
-	Settings.fullscreen_enabled = fullscreen_check_box.button_pressed
+	Settings.fullscreen_enabled = get_fullscreen_state()
 
 func save_all_settings() -> void:
 	Settings.save_and_apply()
@@ -152,3 +147,47 @@ signal toggled_resolution_dropdown(toggled_on: bool)
 
 func _on_resolution_dropdown_toggled(toggled_on: bool) -> void:
 	toggled_resolution_dropdown.emit(toggled_on)
+
+signal boop_required
+func _on_options_confirm_pressed() -> void:
+	set_display_settings()
+	save_all_settings()
+	# Play confirmation sound (handled by main.gd).
+	boop_required.emit()
+	navigate(main_menu)
+
+signal window_drag_block_should_increment
+func _on_slider_mouse_enter_or_drag_start() -> void:
+	window_drag_block_should_increment.emit()
+
+signal window_drag_block_should_decrement
+func _on_slider_mouse_exit() -> void:
+	window_drag_block_should_decrement.emit()
+
+signal window_drag_block_should_clear
+func _on_slider_drag_ended(_value_changed: bool, slider: Slider) -> void:
+	#if value_changed:
+		# TODO: This might be better connected to value_changed.
+		#Settings.set_and_apply_audio_volume(slider_to_bus_map[slider], slider.value)
+	if slider == sounds_slider:
+		boop_required.emit()
+	
+	# Window drag blocking reference count signal propagation.
+	if get_viewport().get_visible_rect().has_point(get_viewport().get_mouse_position()):
+		window_drag_block_should_decrement.emit()
+	else:
+		# As a safety check for some edge cases:
+		# If the cursor is outside window bounds when slider drag ends,
+		# clear the reference counter (handled by signal processor i.e. main.gd).
+		window_drag_block_should_clear.emit()
+
+var volume_change_application_allowed := true
+const VOLUME_CHANGE_DEBOUNCE_DELAY := 0.1
+func _on_slider_value_changed(value: float, slider: Slider) -> void:
+	if volume_change_application_allowed:
+		Settings.set_and_apply_audio_volume(slider_to_bus_map[slider], value)
+		volume_change_application_allowed = false
+		get_tree().create_timer(VOLUME_CHANGE_DEBOUNCE_DELAY).connect(
+			"timeout",
+			func():volume_change_application_allowed = true
+			)

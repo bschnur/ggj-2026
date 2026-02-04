@@ -239,6 +239,9 @@ func _input(event: InputEvent) -> void:
 			FilterColor.BLUE:
 				filter_color = FilterColor.RED
 	elif event.is_action_pressed("snag_item"):
+		if window_drag_block > 0: return
+		if world.visible and not pause_menu.visible: return
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN: return
 		is_dragging_mouse = true
 		# Record global starting point - avoids "center-snap" issues
 		drag_mouse_start_pos = DisplayServer.mouse_get_position()
@@ -246,6 +249,7 @@ func _input(event: InputEvent) -> void:
 		drag_stashed_mouse_mode = Input.mouse_mode
 		Input.mouse_mode = Settings.drag_mouse_mode
 	elif event.is_action_released("snag_item"):
+		if not is_dragging_mouse: return
 		is_dragging_mouse = false
 		Input.mouse_mode = drag_stashed_mouse_mode
 		_snap_window_to_screen()
@@ -281,8 +285,25 @@ func _snap_window_to_screen() -> void:
 		
 		# Align software mouse with new local hardware position after snap
 		software_mouse.position = get_viewport().get_mouse_position()
-		# TODO: Does G know what they're doing here?
-		#world_blend_viewport.update_mouse_pos()
+
+func set_window_layout(is_fullscreen: bool, resolution: Vector2i) -> void:
+	if is_fullscreen:
+		# 1. Clear borderless flag first to prevent OS state 'bleeding'
+		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+		# 2. Use WINDOW_MODE_FULLSCREEN (non-exclusive) as requested
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		# 1. Force back to Windowed to allow resizing
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		# 2. Explicitly re-apply Borderless for your draggable window setup
+		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
+		# 3. Set Size
+		DisplayServer.window_set_size(resolution)
+		# 4. Center on the usable area of the current screen
+		var screen = DisplayServer.window_get_current_screen()
+		var screen_rect = DisplayServer.screen_get_usable_rect(screen)
+		var window_size = DisplayServer.window_get_size()
+		DisplayServer.window_set_position(screen_rect.position + (Vector2i(screen_rect.size) - window_size) / 2)
 
 func get_window_center() -> Vector2:
 	return get_viewport().get_visible_rect().size * 0.5
@@ -304,11 +325,6 @@ func hide_and_disable(n: Node) -> void:
 	n.process_mode = PROCESS_MODE_DISABLED
 	n.set_process_input(false)
 
-
-#func _on_mouse_moved(pos: Vector2) -> void:
-	#software_mouse.position = pos
-
-
 func _on_win_screen_dismissed() -> void:
 	nav_to_title()
 
@@ -325,7 +341,28 @@ func _on_pause_menu_toggled_resolution_dropdown(toggled_on: bool) -> void:
 		filter_color = FilterColor.NONE
 	else:
 		software_mouse.position = get_viewport().get_mouse_position()
-		# TODO: Does G know what they're doing here?
-		#world_blend_viewport.update_mouse_pos()
 		filter_color = stashed_filter_color
 		os_cursor_showing = false
+		
+		var target_res = pause_menu.get_selected_resolution()
+		var is_fs = pause_menu.get_fullscreen_state()
+		set_window_layout(is_fs, target_res)
+
+var slider_is_dragging := false
+func _on_pause_menu_slider_drag_started(_slider: Slider) -> void:
+	slider_is_dragging = true
+
+
+func _on_pause_menu_slider_drag_ended(_slider: Slider) -> void:
+	slider_is_dragging = false
+
+var window_drag_block := 0
+
+func _on_window_drag_block_should_increment() -> void:
+	window_drag_block += 1
+
+func _on_window_drag_block_should_decrement() -> void:
+	window_drag_block = max(0, window_drag_block - 1)
+	
+func _on_window_drag_block_should_clear() -> void:
+	window_drag_block = 0
