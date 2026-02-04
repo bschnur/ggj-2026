@@ -129,4 +129,4 @@ func _apply_settings() -> void:
 
 const show_os_mouse_mode := Input.MOUSE_MODE_VISIBLE
 const hide_os_mouse_mode := Input.MOUSE_MODE_CONFINED_HIDDEN
-const drag_mouse_mode := Input.MOUSE_MODE_CAPTURED
+const drag_mouse_mode := Input.MOUSE_MODE_HIDDEN

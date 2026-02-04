@@ -208,22 +208,28 @@ func _unhandled_input(event: InputEvent) -> void:
 		pause_menu.show()
 
 var is_dragging_mouse := false
-var stashed_mouse_offset_from_center: Vector2
+var drag_mouse_start_pos: Vector2i
 var drag_stashed_mouse_mode: Input.MouseMode
+
+var os_cursor_showing := false
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
+		if os_cursor_showing: return
 		if is_dragging_mouse:
+			# Get current desktop position (unaffected by Godot's coordinate system)
+			var current_mouse_pos := DisplayServer.mouse_get_position()
+			var delta := current_mouse_pos - drag_mouse_start_pos
+			# Move window by desktop delta
 			var current_window_pos := DisplayServer.window_get_position()
-			DisplayServer.window_set_position(current_window_pos + Vector2i(event.relative))
+			DisplayServer.window_set_position(current_window_pos + delta)
+			# Update anchor for next event
+			drag_mouse_start_pos = current_mouse_pos
 		else:
 			# Non-dragging / typical mouse movement.
+			if get_tree().paused: return
 			world_blend_viewport.update_mouse_pos()
-			# The mouse position within the 0 to size.x/y range of THIS viewport.
-			# It is the "canonical" coordinate for FRAGCOORD.
-			var mouse_pos := (event as InputEventMouseMotion).position
-			# Update the position of the software mouse.
-			software_mouse.position = mouse_pos
+			software_mouse.position = event.position
 	elif event.is_action_pressed("toggle_spotlight_filter"):
 		match filter_color:
 			FilterColor.NONE:
@@ -234,14 +240,49 @@ func _input(event: InputEvent) -> void:
 				filter_color = FilterColor.RED
 	elif event.is_action_pressed("snag_item"):
 		is_dragging_mouse = true
+		# Record global starting point - avoids "center-snap" issues
+		drag_mouse_start_pos = DisplayServer.mouse_get_position()
+		# Use HIDDEN instead of CAPTURED to maintain infinite movement without centering
 		drag_stashed_mouse_mode = Input.mouse_mode
 		Input.mouse_mode = Settings.drag_mouse_mode
-		stashed_mouse_offset_from_center = software_mouse.position - get_window_center()
 	elif event.is_action_released("snag_item"):
 		is_dragging_mouse = false
 		Input.mouse_mode = drag_stashed_mouse_mode
-		var final_local_pos := get_window_center() + stashed_mouse_offset_from_center
-		get_viewport().warp_mouse(final_local_pos)
+		_snap_window_to_screen()
+
+const SNAP_MARGIN := 40.0
+
+func _snap_window_to_screen() -> void:
+	var window_pos := DisplayServer.window_get_position()
+	var window_size := DisplayServer.window_get_size()
+	var window_rect := Rect2i(window_pos, window_size)
+	var is_visible_enough := false
+
+	# Check all screens for 40x40px visibility
+	for i in DisplayServer.get_screen_count():
+		var screen_rect := DisplayServer.screen_get_usable_rect(i)
+		var intersection := window_rect.intersection(screen_rect)
+		if intersection.size.x >= SNAP_MARGIN and intersection.size.y >= SNAP_MARGIN:
+			is_visible_enough = true
+			break
+
+	if not is_visible_enough:
+		var screen := DisplayServer.window_get_current_screen()
+		var usable := DisplayServer.screen_get_usable_rect(screen)
+
+		var clamped_x: int = clamp(window_pos.x, 
+			usable.position.x - (window_size.x - SNAP_MARGIN), 
+			usable.end.x - SNAP_MARGIN)
+		var clamped_y: int = clamp(window_pos.y, 
+			usable.position.y - (window_size.y - SNAP_MARGIN), 
+			usable.end.y - SNAP_MARGIN)
+			
+		DisplayServer.window_set_position(Vector2i(clamped_x, clamped_y))
+		
+		# Align software mouse with new local hardware position after snap
+		software_mouse.position = get_viewport().get_mouse_position()
+		# TODO: Does G know what they're doing here?
+		#world_blend_viewport.update_mouse_pos()
 
 func get_window_center() -> Vector2:
 	return get_viewport().get_visible_rect().size * 0.5
@@ -264,8 +305,8 @@ func hide_and_disable(n: Node) -> void:
 	n.set_process_input(false)
 
 
-func _on_mouse_moved(pos: Vector2) -> void:
-	software_mouse.position = pos
+#func _on_mouse_moved(pos: Vector2) -> void:
+	#software_mouse.position = pos
 
 
 func _on_win_screen_dismissed() -> void:
@@ -278,7 +319,13 @@ func _on_pause_menu_boop_required() -> void:
 
 func _on_pause_menu_toggled_resolution_dropdown(toggled_on: bool) -> void:
 	if toggled_on:
+		is_dragging_mouse = false
+		os_cursor_showing = true
 		stashed_filter_color = filter_color
 		filter_color = FilterColor.NONE
 	else:
+		software_mouse.position = get_viewport().get_mouse_position()
+		# TODO: Does G know what they're doing here?
+		#world_blend_viewport.update_mouse_pos()
 		filter_color = stashed_filter_color
+		os_cursor_showing = false
