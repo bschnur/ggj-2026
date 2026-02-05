@@ -63,7 +63,7 @@ func init_settings_values() -> void:
 	voice_slider.value = Settings.bus_volumes[Settings.AudioBus.VOICE]
 	
 	fullscreen_check_box.button_pressed = Settings.fullscreen_enabled
-	var res_id := screen_resolutions[Settings.screen_resolution]
+	var res_id := screen_resolutions[Settings.screen_resolution_string]
 	var res_idx: int = resolution_dropdown.get_item_index(res_id)
 	resolution_dropdown.select(res_idx)
 
@@ -121,9 +121,14 @@ func _on_slider_drag_ended(value_changed: bool, source: Slider) -> void:
 	if source == sounds_slider:
 		boop_required.emit()
 
-func apply_display_settings() -> void:
+func get_selected_resolution() -> Vector2i:
 	var res_id: int = resolution_dropdown.get_item_id(resolution_dropdown.selected)
-	Settings.screen_resolution = screen_resolutions.find_key(res_id)
+	var res_string: String = screen_resolutions.find_key(res_id)
+	var res_arr := res_string.split("x")
+	return Vector2i(int(res_arr[0]), int(res_arr[1]))
+
+func apply_display_settings() -> void:
+	Settings.screen_resolution = get_selected_resolution()
 	Settings.fullscreen_enabled = fullscreen_check_box.button_pressed
 
 func save_all_settings() -> void:

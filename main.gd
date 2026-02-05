@@ -4,7 +4,7 @@ class_name Main
 # TODO:
 
 # 1. Scale cursor based on window/viewport width/height (relevant todo below).
-# 2. Fix inconsistent fullscreen/res changes (probably should unify changes in settings
+# 2. X? Fix inconsistent fullscreen/res changes (probably should unify changes in settings
 #		by propagating signals from pause_menu instead of directly setting from there).
 # 3. Address the issue of low resolution keyhole syndrome
 # 		(maybe involves minimum sizes, anchors, or stretch?).

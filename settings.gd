@@ -32,7 +32,10 @@ var bus_to_bus_name_map := {
 }
 
 var fullscreen_enabled := true
-var screen_resolution := "1920x1080"
+var screen_resolution := Vector2i(1920, 1080)
+var screen_resolution_string: String:
+	get:
+		return "%dx%d" % [screen_resolution.x, screen_resolution.y]
 
 signal settings_loaded
 
@@ -106,13 +109,10 @@ func apply_display_settings() -> void:
 		# Wait for the OS to finish the transition
 		await get_tree().process_frame
 	
-	var res_arr := screen_resolution.split("x")
-	var res_vec := Vector2i(int(res_arr[0]), int(res_arr[1]))
-	
-	get_window().content_scale_size = res_vec
+	get_window().content_scale_size = screen_resolution
 	
 	if not fullscreen_enabled:
-		DisplayServer.window_set_size(res_vec)
+		DisplayServer.window_set_size(screen_resolution)
 		# Wait for the OS to finish the transition
 		await get_tree().process_frame
 		# Manual Center Calculation - more reliable than move_to_center()
