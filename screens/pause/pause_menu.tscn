@@ -16,6 +16,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="PauseMenu" type="CanvasLayer"]
+follow_viewport_enabled = true
 script = ExtResource("1_hdmo1")
 
 [node name="Panel" type="Panel" parent="."]
@@ -27,63 +28,56 @@ grow_vertical = 2
 theme = ExtResource("2_nwcfo")
 theme_override_styles/panel = SubResource("StyleBoxFlat_muofk")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MainMenu" type="VBoxContainer" parent="CenterContainer"]
+[node name="MainMenu" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
+anchors_preset = -1
+anchor_left = 0.45
+anchor_top = 0.1
+anchor_right = 0.55
+anchor_bottom = 0.9
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="ResumeButton" type="Button" parent="CenterContainer/MainMenu"]
-custom_minimum_size = Vector2(160, 60)
+[node name="ResumeButton" type="Button" parent="MainMenu"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_type_variation = &"FunkyButton"
 text = "Resume"
 
-[node name="OptionsButton" type="Button" parent="CenterContainer/MainMenu"]
-custom_minimum_size = Vector2(160, 60)
+[node name="OptionsButton" type="Button" parent="MainMenu"]
 layout_direction = 3
 layout_mode = 2
-size_flags_horizontal = 4
 theme_type_variation = &"FunkyButton"
 text = "Options"
 
-[node name="CreditsButton" type="Button" parent="CenterContainer/MainMenu"]
-custom_minimum_size = Vector2(160, 60)
+[node name="CreditsButton" type="Button" parent="MainMenu"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_type_variation = &"FunkyButton"
 text = "Credits"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/MainMenu"]
-custom_minimum_size = Vector2(160, 60)
+[node name="QuitButton" type="Button" parent="MainMenu"]
 layout_direction = 3
 layout_mode = 2
-size_flags_horizontal = 4
 theme_type_variation = &"FunkyButton"
 text = "Quit"
 
-[node name="OptionsMenu" type="VBoxContainer" parent="CenterContainer"]
+[node name="OptionsMenu" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(800, 0)
-layout_mode = 2
-theme_override_constants/separation = 100
+visible = false
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="DisplaySection" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
+[node name="DisplaySection" type="VBoxContainer" parent="OptionsMenu"]
 layout_mode = 2
-theme_override_constants/separation = 40
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
 
-[node name="DisplayLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection"]
+[node name="DisplayLabel" type="Label" parent="OptionsMenu/DisplaySection"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
@@ -91,21 +85,21 @@ theme_override_font_sizes/font_size = 18
 text = "Display settings"
 horizontal_alignment = 1
 
-[node name="DisplaySettings" type="VBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection"]
-custom_minimum_size = Vector2(660, 0)
+[node name="DisplaySettings" type="VBoxContainer" parent="OptionsMenu/DisplaySection"]
 layout_mode = 2
-theme_override_constants/separation = 60
+size_flags_vertical = 4
 
-[node name="Resolution" type="HBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings"]
+[node name="Resolution" type="HBoxContainer" parent="OptionsMenu/DisplaySection/DisplaySettings"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="ResolutionLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
+[node name="ResolutionLabel" type="Label" parent="OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
 layout_mode = 2
 text = "Screen resolution: "
 
-[node name="ResolutionDropdown" type="OptionButton" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
+[node name="ResolutionDropdown" type="OptionButton" parent="OptionsMenu/DisplaySection/DisplaySettings/Resolution"]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -113,26 +107,33 @@ item_count = 1
 popup/item_0/text = "1920x1080"
 popup/item_0/id = 0
 
-[node name="Fullscreen" type="HBoxContainer" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings"]
+[node name="Fullscreen" type="HBoxContainer" parent="OptionsMenu/DisplaySection/DisplaySettings"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="FullscreenLabel" type="Label" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
+[node name="FullscreenLabel" type="Label" parent="OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Fullscreen:"
 
-[node name="FullscreenCheckBox" type="CheckBox" parent="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
+[node name="FullscreenCheckBox" type="CheckBox" parent="OptionsMenu/DisplaySection/DisplaySettings/Fullscreen"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AudioSection" type="VBoxContainer" parent="CenterContainer/OptionsMenu"]
+[node name="Control" type="Control" parent="OptionsMenu"]
 layout_mode = 2
-theme_override_constants/separation = 40
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
 
-[node name="AudioLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection"]
+[node name="AudioSection" type="VBoxContainer" parent="OptionsMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="AudioLabel" type="Label" parent="OptionsMenu/AudioSection"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
@@ -140,26 +141,35 @@ theme_override_font_sizes/font_size = 18
 text = "Audio settings"
 horizontal_alignment = 1
 
-[node name="AudioSettings" type="VBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection"]
+[node name="VolumesContainer" type="HBoxContainer" parent="OptionsMenu/AudioSection"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 40
+size_flags_vertical = 3
 
-[node name="Master" type="HBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings"]
+[node name="Control" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Volumes" type="VBoxContainer" parent="OptionsMenu/AudioSection/VolumesContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Master" type="HBoxContainer" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 60
 
-[node name="MasterLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Master"]
-layout_mode = 2
-size_flags_horizontal = 6
-text = "Main Volume"
-
-[node name="MasterSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Master"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 0)
+[node name="MasterLabel" type="Label" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Master"]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 4
+text = "Main Volume"
+
+[node name="MasterSlider" type="HSlider" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Master"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 6.0
 max_value = 1.0
 step = 0.01
 value = 0.5
@@ -168,22 +178,34 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 2
 
-[node name="Music" type="HBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings"]
+[node name="Control" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Music" type="HBoxContainer" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 60
 
-[node name="MusicLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Music"]
+[node name="Control" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="MusicLabel" type="Label" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Music"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_stretch_ratio = 1.3
 theme_override_font_sizes/font_size = 24
 text = "Music"
 
-[node name="MusicSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Music"]
+[node name="MusicSlider" type="HSlider" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Music"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 size_flags_vertical = 4
+size_flags_stretch_ratio = 6.0
 max_value = 1.0
 step = 0.01
 value = 0.5
@@ -192,22 +214,33 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 2
 
-[node name="Sounds" type="HBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings"]
+[node name="Control2" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Sounds" type="HBoxContainer" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 60
 
-[node name="SoundsLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Sounds"]
+[node name="Control" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Sounds"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SoundsLabel" type="Label" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Sounds"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_stretch_ratio = 1.3
 theme_override_font_sizes/font_size = 24
 text = "Sounds"
 
-[node name="SoundsSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Sounds"]
+[node name="SoundsSlider" type="HSlider" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Sounds"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 size_flags_vertical = 4
+size_flags_stretch_ratio = 6.0
 max_value = 1.0
 step = 0.01
 value = 0.5
@@ -216,22 +249,33 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 2
 
-[node name="Voice" type="HBoxContainer" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings"]
+[node name="Control3" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Voice" type="HBoxContainer" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 60
 
-[node name="VoiceLabel" type="Label" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Voice"]
+[node name="Control" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Voice"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VoiceLabel" type="Label" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Voice"]
 layout_mode = 2
 size_flags_horizontal = 10
+size_flags_stretch_ratio = 1.3
 theme_override_font_sizes/font_size = 24
 text = "Voice"
 
-[node name="VoiceSlider" type="HSlider" parent="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Voice"]
+[node name="VoiceSlider" type="HSlider" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Voice"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 size_flags_vertical = 4
+size_flags_stretch_ratio = 6.0
 max_value = 1.0
 step = 0.01
 value = 0.5
@@ -240,182 +284,217 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 2
 
-[node name="OptionsConfirmCancel" type="HBoxContainer" parent="CenterContainer/OptionsMenu"]
-custom_minimum_size = Vector2(1000, 0)
+[node name="Control2" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 40
+size_flags_horizontal = 3
 
-[node name="OptionsCancel" type="Button" parent="CenterContainer/OptionsMenu/OptionsConfirmCancel"]
-custom_minimum_size = Vector2(330, 70)
+[node name="Control2" type="Control" parent="OptionsMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="OptionsConfirmCancel" type="HBoxContainer" parent="OptionsMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Control" type="Control" parent="OptionsMenu/OptionsConfirmCancel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="OptionsCancel" type="Button" parent="OptionsMenu/OptionsConfirmCancel"]
 layout_direction = 3
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 3
 theme_type_variation = &"FunkyButton"
 text = "Cancel and discard"
 
-[node name="OptionsConfirm" type="Button" parent="CenterContainer/OptionsMenu/OptionsConfirmCancel"]
-custom_minimum_size = Vector2(280, 70)
+[node name="Control2" type="Control" parent="OptionsMenu/OptionsConfirmCancel"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="OptionsConfirm" type="Button" parent="OptionsMenu/OptionsConfirmCancel"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_type_variation = &"FunkyButton"
 text = "Accept changes"
 
-[node name="QuitMenu" type="VBoxContainer" parent="CenterContainer"]
+[node name="Control3" type="Control" parent="OptionsMenu/OptionsConfirmCancel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="QuitMenu" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.3
+anchor_right = 0.6
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="QuitToTitleButton" type="Button" parent="CenterContainer/QuitMenu"]
+[node name="QuitToTitleButton" type="Button" parent="QuitMenu"]
 layout_mode = 2
 theme_type_variation = &"FunkyButton"
 text = "Quit to Title"
 
-[node name="QuitToDesktopButton" type="Button" parent="CenterContainer/QuitMenu"]
+[node name="QuitToDesktopButton" type="Button" parent="QuitMenu"]
 layout_direction = 3
 layout_mode = 2
 theme_type_variation = &"FunkyButton"
 text = "Quit to Desktop"
 
-[node name="QuitBackButton" type="Button" parent="CenterContainer/QuitMenu"]
+[node name="QuitBackButton" type="Button" parent="QuitMenu"]
 layout_mode = 2
 theme_type_variation = &"FunkyButton"
 text = "Back"
 
-[node name="Credits" type="VBoxContainer" parent="CenterContainer"]
+[node name="Credits" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
-theme_override_constants/separation = 120
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
 
-[node name="Devs" type="HBoxContainer" parent="CenterContainer/Credits"]
+[node name="Devs" type="HBoxContainer" parent="Credits"]
 layout_mode = 2
-theme_override_constants/separation = 200
+size_flags_vertical = 3
+alignment = 1
 
-[node name="Zeitgeist" type="VBoxContainer" parent="CenterContainer/Credits/Devs"]
+[node name="Zeitgeist" type="VBoxContainer" parent="Credits/Devs"]
 layout_mode = 2
+size_flags_horizontal = 7
 
-[node name="Label" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
+[node name="Label" type="Label" parent="Credits/Devs/Zeitgeist"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9411765, 0.9411765, 0.9411765, 1)
+theme_override_colors/font_color = Color(0, 0, 0.8156863, 1)
 text = "Zeitgeist Antares / Eelwaffle"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
+[node name="Label2" type="Label" parent="Credits/Devs/Zeitgeist"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
 text = "Gameplay Concept & Design"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
+[node name="Label3" type="Label" parent="Credits/Devs/Zeitgeist"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
 text = "Concept Art"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="CenterContainer/Credits/Devs/Zeitgeist"]
+[node name="Label4" type="Label" parent="Credits/Devs/Zeitgeist"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
 text = "In-game Art"
 horizontal_alignment = 1
 
-[node name="Ben" type="VBoxContainer" parent="CenterContainer/Credits/Devs"]
+[node name="Martin" type="VBoxContainer" parent="Credits/Devs"]
 layout_mode = 2
+size_flags_horizontal = 7
 
-[node name="Label" type="Label" parent="CenterContainer/Credits/Devs/Ben"]
+[node name="Label" type="Label" parent="Credits/Devs/Martin"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9411765, 0.9411765, 0.9411765, 1)
-text = "Ben Schnur"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="CenterContainer/Credits/Devs/Ben"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
-text = "Gameplay Concept & Design"
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="CenterContainer/Credits/Devs/Ben"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
-text = "Code & Implementation"
-horizontal_alignment = 1
-
-[node name="Label4" type="Label" parent="CenterContainer/Credits/Devs/Ben"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
-text = "In-game Art"
-horizontal_alignment = 1
-
-[node name="Martin" type="VBoxContainer" parent="CenterContainer/Credits/Devs"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/Credits/Devs/Martin"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9411765, 0.9411765, 0.9411765, 1)
+theme_override_colors/font_color = Color(0.627451, 0, 0.627451, 1)
 text = "Martin Bayer"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CenterContainer/Credits/Devs/Martin"]
+[node name="Label2" type="Label" parent="Credits/Devs/Martin"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
 text = "Music"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="CenterContainer/Credits/Devs/Martin"]
+[node name="Label3" type="Label" parent="Credits/Devs/Martin"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
 text = "Comradery"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="CenterContainer/Credits/Devs/Martin"]
+[node name="Label4" type="Label" parent="Credits/Devs/Martin"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
 text = "Demeanor"
 horizontal_alignment = 1
 
-[node name="ThirdParty" type="VBoxContainer" parent="CenterContainer/Credits"]
+[node name="Ben" type="VBoxContainer" parent="Credits/Devs"]
 layout_mode = 2
+size_flags_horizontal = 7
+
+[node name="Label" type="Label" parent="Credits/Devs/Ben"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8156863, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.0627451, 0, 0.0627451, 1)
+text = "Ben Schnur"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Credits/Devs/Ben"]
+layout_mode = 2
+text = "Gameplay Concept & Design"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Credits/Devs/Ben"]
+layout_mode = 2
+text = "Code & Implementation"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Credits/Devs/Ben"]
+layout_mode = 2
+text = "In-game Art"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Credits"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ThirdParty" type="VBoxContainer" parent="Credits"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="Godot" type="Label" parent="CenterContainer/Credits/ThirdParty"]
+[node name="Godot" type="Label" parent="Credits/ThirdParty"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
 text = "Made in Godot"
 horizontal_alignment = 1
 
-[node name="Music" type="Label" parent="CenterContainer/Credits/ThirdParty"]
+[node name="Music" type="Label" parent="Credits/ThirdParty"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
 text = "Additional royalty-free music from zapsplat.com"
 horizontal_alignment = 1
 
-[node name="Sound" type="Label" parent="CenterContainer/Credits/ThirdParty"]
+[node name="Sound" type="Label" parent="Credits/ThirdParty"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.61960787, 0.61960787, 0.61960787, 1)
 text = "Sound effect provided by Virtual_Vibes via pixabay.com"
 horizontal_alignment = 1
 
-[node name="CreditsBackButton" type="Button" parent="CenterContainer/Credits"]
-custom_minimum_size = Vector2(200, 0)
+[node name="Control2" type="Control" parent="Credits"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CreditsBackButton" type="Button" parent="Credits"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 3
 theme_type_variation = &"FunkyButton"
 text = "Back"
 
-[connection signal="pressed" from="CenterContainer/MainMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="CenterContainer/MainMenu/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="CenterContainer/MainMenu/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="CenterContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="toggled" from="CenterContainer/OptionsMenu/DisplaySection/DisplaySettings/Resolution/ResolutionDropdown" to="." method="_on_resolution_dropdown_toggled"]
-[connection signal="drag_ended" from="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Master/MasterSlider" to="." method="_on_slider_drag_ended" flags=18]
-[connection signal="drag_ended" from="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Music/MusicSlider" to="." method="_on_slider_drag_ended" flags=18]
-[connection signal="drag_ended" from="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Sounds/SoundsSlider" to="." method="_on_slider_drag_ended" flags=18]
-[connection signal="drag_ended" from="CenterContainer/OptionsMenu/AudioSection/AudioSettings/Voice/VoiceSlider" to="." method="_on_slider_drag_ended" flags=18]
-[connection signal="pressed" from="CenterContainer/OptionsMenu/OptionsConfirmCancel/OptionsCancel" to="." method="_on_options_cancel_pressed"]
-[connection signal="pressed" from="CenterContainer/OptionsMenu/OptionsConfirmCancel/OptionsConfirm" to="." method="_on_options_confirm_pressed"]
-[connection signal="pressed" from="CenterContainer/QuitMenu/QuitToTitleButton" to="." method="_on_quit_to_title_button_pressed"]
-[connection signal="pressed" from="CenterContainer/QuitMenu/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]
-[connection signal="pressed" from="CenterContainer/QuitMenu/QuitBackButton" to="." method="_on_quit_back_button_pressed"]
-[connection signal="pressed" from="CenterContainer/Credits/CreditsBackButton" to="." method="_on_credits_back_button_pressed"]
+[connection signal="pressed" from="MainMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MainMenu/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenu/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="toggled" from="OptionsMenu/DisplaySection/DisplaySettings/Resolution/ResolutionDropdown" to="." method="_on_resolution_dropdown_toggled"]
+[connection signal="drag_ended" from="OptionsMenu/AudioSection/VolumesContainer/Volumes/Master/MasterSlider" to="." method="_on_slider_drag_ended" flags=18]
+[connection signal="drag_ended" from="OptionsMenu/AudioSection/VolumesContainer/Volumes/Music/MusicSlider" to="." method="_on_slider_drag_ended" flags=18]
+[connection signal="drag_ended" from="OptionsMenu/AudioSection/VolumesContainer/Volumes/Sounds/SoundsSlider" to="." method="_on_slider_drag_ended" flags=18]
+[connection signal="drag_ended" from="OptionsMenu/AudioSection/VolumesContainer/Volumes/Voice/VoiceSlider" to="." method="_on_slider_drag_ended" flags=18]
+[connection signal="pressed" from="OptionsMenu/OptionsConfirmCancel/OptionsCancel" to="." method="_on_options_cancel_pressed"]
+[connection signal="pressed" from="OptionsMenu/OptionsConfirmCancel/OptionsConfirm" to="." method="_on_options_confirm_pressed"]
+[connection signal="pressed" from="QuitMenu/QuitToTitleButton" to="." method="_on_quit_to_title_button_pressed"]
+[connection signal="pressed" from="QuitMenu/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]
+[connection signal="pressed" from="QuitMenu/QuitBackButton" to="." method="_on_quit_back_button_pressed"]
+[connection signal="pressed" from="Credits/CreditsBackButton" to="." method="_on_credits_back_button_pressed"]
