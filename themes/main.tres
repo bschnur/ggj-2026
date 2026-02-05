@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://cngg0a3aok74u"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://cngg0a3aok74u"]
 
 [ext_resource type="StyleBox" uid="uid://b3g3msru20e7v" path="res://themes/styleboxes/button_flat_disabled.tres" id="1_7d6gw"]
 [ext_resource type="Texture2D" uid="uid://bol8uelcp2jd3" path="res://art/ui/checked_outlined.png" id="1_a70tl"]
@@ -12,9 +12,38 @@
 [ext_resource type="StyleBox" uid="uid://dngclumfexou" path="res://themes/styleboxes/button_flat_pressed.tres" id="7_10so0"]
 [ext_resource type="StyleBox" uid="uid://dhnkjs5qfhkv6" path="res://themes/styleboxes/button_flat_pressed_mirrored.tres" id="8_30s71"]
 [ext_resource type="Texture2D" uid="uid://dnjx7b8uadvlf" path="res://art/ui/dropdown_arrow.png" id="11_7wdlx"]
+[ext_resource type="Texture2D" uid="uid://cs1ts5172gp3t" path="res://art/ui/slider_grabber.png" id="11_nmpmk"]
 [ext_resource type="StyleBox" uid="uid://bymrbw4b58khk" path="res://themes/styleboxes/dropdown/dropdown_normal.tres" id="11_riwsl"]
 [ext_resource type="StyleBox" uid="uid://ctkrjgbssr5hc" path="res://themes/styleboxes/dropdown/popup_menu_hover.tres" id="13_a70tl"]
 [ext_resource type="StyleBox" uid="uid://bk8l1hssg7qaf" path="res://themes/styleboxes/dropdown/popup_menu_panel.tres" id="14_nmpmk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gt862"]
+bg_color = Color(0.0627451, 0, 0.0627451, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0627451, 0, 0.0627451, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6m817"]
+bg_color = Color(1, 0.9411765, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0627451, 0, 0.0627451, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
 
 [resource]
 default_font = ExtResource("2_78ekx")
@@ -35,6 +64,12 @@ FunkyButton/styles/normal = ExtResource("1_wykhr")
 FunkyButton/styles/normal_mirrored = ExtResource("2_wc0q8")
 FunkyButton/styles/pressed = ExtResource("7_10so0")
 FunkyButton/styles/pressed_mirrored = ExtResource("8_30s71")
+HSlider/constants/center_grabber = 1
+HSlider/icons/grabber = ExtResource("11_nmpmk")
+HSlider/icons/grabber_highlight = ExtResource("11_nmpmk")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_gt862")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_gt862")
+HSlider/styles/slider = SubResource("StyleBoxFlat_6m817")
 Label/colors/font_color = Color(1, 0.9411765, 1, 1)
 Label/colors/font_outline_color = Color(0.0627451, 0, 0.0627451, 1)
 Label/constants/outline_size = 8
