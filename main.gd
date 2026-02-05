@@ -3,8 +3,6 @@ class_name Main
 
 # TODO:
 
-# 1. ~X Address the issue of low resolution keyhole syndrome
-# 		(shader subviewports and title image still not playing nice).
 # 2. Scale cursor based on window/viewport width/height (relevant todo below).
 # 3. Auto-set fullscreen to true if monitor size is selected? (Otherwise clicks pass through to taskbar.)
 # 4. Resolve fullscreen consistency issue (if checkbox already clear and change to a res
@@ -193,6 +191,8 @@ func init_cursor_images() -> void:
 			_filter_cursor_images[key] = t.get_image()
 
 func scale_cursor_images() -> void:
+	# TODO: Call this when resolution changes (already calling on _ready)
+	# TODO: incorporate Settings.screen_resolution_scale
 	if current_screen_scale != os_screen_scale:
 		var scale_factor = current_screen_scale / os_screen_scale
 		for img in _filter_cursor_images.values():

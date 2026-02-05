@@ -32,10 +32,17 @@ var bus_to_bus_name_map := {
 }
 
 var fullscreen_enabled := true
-var screen_resolution := Vector2i(1920, 1080)
+var default_screen_resolution := Vector2i(1920, 1080)
+var screen_resolution := default_screen_resolution
 var screen_resolution_string: String:
 	get:
 		return "%dx%d" % [screen_resolution.x, screen_resolution.y]
+var screen_resolution_scale: Vector2:
+	get:
+		return Vector2(
+			float(screen_resolution.x) / float(default_screen_resolution.x),
+			float(screen_resolution.y) / float(default_screen_resolution.y)
+			)
 
 signal settings_loaded
 signal display_settings_updated_in_menu(fs:bool, res:Vector2i)
