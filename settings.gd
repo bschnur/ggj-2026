@@ -38,10 +38,16 @@ var screen_resolution_string: String:
 		return "%dx%d" % [screen_resolution.x, screen_resolution.y]
 
 signal settings_loaded
+signal display_settings_updated_in_menu(fs:bool, res:Vector2i)
 
 func _ready() -> void:
 	_load_settings()
 	get_tree().process_frame.connect(_on_first_frame, CONNECT_ONE_SHOT)
+	display_settings_updated_in_menu.connect(_absorb_menu_settings)
+
+func _absorb_menu_settings(fs: bool, res: Vector2i):
+	fullscreen_enabled = fs
+	screen_resolution = res
 
 func _on_first_frame() -> void:
 	if not fullscreen_enabled:

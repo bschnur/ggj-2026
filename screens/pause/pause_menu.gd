@@ -35,9 +35,7 @@ var screen_resolutions: Dictionary[String, int] = {
 	"800x600": 600,
 }
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# TODO: connect to settings loaded signal; move all initialization based on Settings values/methods into the function subsequently called.
 	Settings.settings_loaded.connect(init_settings_values)
 	init_visibility()
 	init_resolution_values()
@@ -109,7 +107,7 @@ func _on_options_cancel_pressed() -> void:
 
 signal boop_required
 func _on_options_confirm_pressed() -> void:
-	apply_display_settings()
+	update_display_settings()
 	save_all_settings()
 	# Play confirmation sound (handled by main.gd).
 	boop_required.emit()
@@ -127,9 +125,14 @@ func get_selected_resolution() -> Vector2i:
 	var res_arr := res_string.split("x")
 	return Vector2i(int(res_arr[0]), int(res_arr[1]))
 
-func apply_display_settings() -> void:
-	Settings.screen_resolution = get_selected_resolution()
-	Settings.fullscreen_enabled = fullscreen_check_box.button_pressed
+func get_selected_fullscreen_state() -> bool:
+	return fullscreen_check_box.button_pressed
+
+func update_display_settings() -> void:
+	Settings.display_settings_updated_in_menu.emit(
+		get_selected_fullscreen_state(),
+		get_selected_resolution()
+		)
 
 func save_all_settings() -> void:
 	Settings.save_and_apply()

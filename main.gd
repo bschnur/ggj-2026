@@ -3,11 +3,10 @@ class_name Main
 
 # TODO:
 
-# 1. Scale cursor based on window/viewport width/height (relevant todo below).
-# 2. X? Fix inconsistent fullscreen/res changes (probably should unify changes in settings
-#		by propagating signals from pause_menu instead of directly setting from there).
-# 3. Address the issue of low resolution keyhole syndrome
+# 1. Address the issue of low resolution keyhole syndrome
 # 		(maybe involves minimum sizes, anchors, or stretch?).
+# 2. Scale cursor based on window/viewport width/height (relevant todo below).
+# 3. Auto-set fullscreen to true if monitor size is selected? (Otherwise clicks pass through to taskbar.)
 
 var current_screen_scale := 1.0
 # TODO: also store a scalar representing the current game scale compared to 1080p.
