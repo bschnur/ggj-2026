@@ -1,16 +1,16 @@
 [gd_resource type="Theme" load_steps=16 format=3 uid="uid://cngg0a3aok74u"]
 
 [ext_resource type="StyleBox" uid="uid://b3g3msru20e7v" path="res://themes/styleboxes/button_flat_disabled.tres" id="1_7d6gw"]
+[ext_resource type="Texture2D" uid="uid://bol8uelcp2jd3" path="res://art/ui/checked_outlined.png" id="1_a70tl"]
 [ext_resource type="StyleBox" uid="uid://ctxc5t3iuxob7" path="res://themes/styleboxes/button_flat_normal.tres" id="1_wykhr"]
 [ext_resource type="FontFile" uid="uid://c2fl8s2586ikd" path="res://fonts/MountainsofChristmas-Bold.ttf" id="2_78ekx"]
 [ext_resource type="StyleBox" uid="uid://1nnntq8w1x5i" path="res://themes/styleboxes/button_flat_disabled_mirrored.tres" id="2_k5u3e"]
+[ext_resource type="Texture2D" uid="uid://ci1g0mb8prfc3" path="res://art/ui/unchecked_outlined.png" id="2_nmpmk"]
 [ext_resource type="StyleBox" uid="uid://2lhlhmr1ti6t" path="res://themes/styleboxes/button_flat_normal_mirrored.tres" id="2_wc0q8"]
 [ext_resource type="StyleBox" uid="uid://cqusxsx6soso7" path="res://themes/styleboxes/button_flat_hover.tres" id="4_kx4sy"]
 [ext_resource type="StyleBox" uid="uid://cmvogsyry7pgk" path="res://themes/styleboxes/button_flat_hover_mirrored.tres" id="4_nuec8"]
 [ext_resource type="StyleBox" uid="uid://dngclumfexou" path="res://themes/styleboxes/button_flat_pressed.tres" id="7_10so0"]
 [ext_resource type="StyleBox" uid="uid://dhnkjs5qfhkv6" path="res://themes/styleboxes/button_flat_pressed_mirrored.tres" id="8_30s71"]
-[ext_resource type="Texture2D" uid="uid://rrpep5sbb2nu" path="res://art/ui/checked.png" id="9_30s71"]
-[ext_resource type="Texture2D" uid="uid://dh2355kpbdm5l" path="res://art/ui/unchecked.png" id="10_riwsl"]
 [ext_resource type="Texture2D" uid="uid://dnjx7b8uadvlf" path="res://art/ui/dropdown_arrow.png" id="11_7wdlx"]
 [ext_resource type="StyleBox" uid="uid://bymrbw4b58khk" path="res://themes/styleboxes/dropdown/dropdown_normal.tres" id="11_riwsl"]
 [ext_resource type="StyleBox" uid="uid://ctkrjgbssr5hc" path="res://themes/styleboxes/dropdown/popup_menu_hover.tres" id="13_a70tl"]
@@ -19,8 +19,8 @@
 [resource]
 default_font = ExtResource("2_78ekx")
 default_font_size = 48
-CheckBox/icons/checked = ExtResource("9_30s71")
-CheckBox/icons/unchecked = ExtResource("10_riwsl")
+CheckBox/icons/checked = ExtResource("1_a70tl")
+CheckBox/icons/unchecked = ExtResource("2_nmpmk")
 FunkyButton/base_type = &"Button"
 FunkyButton/colors/font_color = Color(1, 0.9411765, 1, 1)
 FunkyButton/colors/font_focus_color = Color(1, 0.9411765, 1, 1)
@@ -35,6 +35,9 @@ FunkyButton/styles/normal = ExtResource("1_wykhr")
 FunkyButton/styles/normal_mirrored = ExtResource("2_wc0q8")
 FunkyButton/styles/pressed = ExtResource("7_10so0")
 FunkyButton/styles/pressed_mirrored = ExtResource("8_30s71")
+Label/colors/font_color = Color(1, 0.9411765, 1, 1)
+Label/colors/font_outline_color = Color(0.0627451, 0, 0.0627451, 1)
+Label/constants/outline_size = 8
 OptionButton/colors/font_color = Color(1, 0.9411765, 1, 1)
 OptionButton/colors/font_focus_color = Color(1, 0.9411765, 1, 1)
 OptionButton/colors/font_hover_color = Color(1, 0.9411765, 1, 1)
