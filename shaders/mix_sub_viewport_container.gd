@@ -8,13 +8,23 @@ extends SubViewportContainer
 
 @onready var mask_buttons := find_children("*", "TextureButton")
 
+@onready var mix_sub_viewport: SubViewport = %MixSubViewport
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	below_texture_rect.texture = below_texture
 	above_texture_rect.texture = above_texture
 	
+#func update_mouse_pos() -> void:
+	#%MixSubViewport.update_mouse_pos()
+
 func update_mouse_pos() -> void:
-	%MixSubViewport.update_mouse_pos()
+	var local_mouse := get_local_mouse_position()
+	var svp_size := mix_sub_viewport.size
+	var scale_vec := Vector2(
+		svp_size.x / size.x,
+		svp_size.y / size.y)
+	RenderingServer.global_shader_parameter_set("mouse_pos", local_mouse * scale_vec)
 
 signal mask_location_clicked(btn: BaseButton, col: Main.FilterColor)
 
