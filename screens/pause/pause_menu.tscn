@@ -161,8 +161,9 @@ theme_override_constants/separation = 60
 
 [node name="MasterLabel" type="Label" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Master"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 text = "Main Volume"
+horizontal_alignment = 2
 
 [node name="MasterSlider" type="HSlider" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Master"]
 unique_name_in_owner = true
@@ -172,7 +173,7 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 6.0
 max_value = 1.0
 step = 0.01
-value = 0.5
+value = 1.0
 scrollable = false
 
 [node name="Control" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes"]
@@ -185,17 +186,13 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 60
 
-[node name="Control" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Music"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
 [node name="MusicLabel" type="Label" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Music"]
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 1.3
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.08
 theme_override_font_sizes/font_size = 24
 text = "Music"
+horizontal_alignment = 2
 
 [node name="MusicSlider" type="HSlider" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Music"]
 unique_name_in_owner = true
@@ -218,16 +215,13 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 60
 
-[node name="Control" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Sounds"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="SoundsLabel" type="Label" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Sounds"]
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 1.3
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.08
 theme_override_font_sizes/font_size = 24
 text = "Sounds"
+horizontal_alignment = 2
 
 [node name="SoundsSlider" type="HSlider" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Sounds"]
 unique_name_in_owner = true
@@ -250,16 +244,13 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 60
 
-[node name="Control" type="Control" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Voice"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="VoiceLabel" type="Label" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Voice"]
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 1.3
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.08
 theme_override_font_sizes/font_size = 24
 text = "Voice"
+horizontal_alignment = 2
 
 [node name="VoiceSlider" type="HSlider" parent="OptionsMenu/AudioSection/VolumesContainer/Volumes/Voice"]
 unique_name_in_owner = true

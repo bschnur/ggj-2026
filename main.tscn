@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ctir38l7dpemo" path="res://art/bkg_blue_w_masks.png" id="5_4c57u"]
 [ext_resource type="Texture2D" uid="uid://d4cjsnm2sxetb" path="res://art/bkg_red_w_masks.png" id="6_efxa6"]
 [ext_resource type="PackedScene" uid="uid://csgok2hbpj1kn" path="res://screens/win/win_screen.tscn" id="9_kek77"]
-[ext_resource type="AudioStream" uid="uid://crkcm6x8ih5ef" path="res://audio/pop-tap-click-fx-383733.mp3" id="10_4c57u"]
+[ext_resource type="AudioStream" uid="uid://dglg8tyq0igiw" path="res://audio/pop-tap-click-fx-383733.wav" id="10_4c57u"]
 
 [node name="Main" type="Node"]
 process_mode = 3

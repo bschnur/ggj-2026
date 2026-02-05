@@ -127,12 +127,12 @@ const music_gap := 2.0
 
 @onready var music_tracks := [
 	preload("res://audio/cats and birds.wav"),
-	preload("res://audio/music_zapsplat_game_music_mystery_underscore_airy_dark_tension_006.mp3"),
+	preload("res://audio/music_zapsplat_game_music_mystery_underscore_airy_dark_tension_006.wav"),
 ]
 
-@onready var sounds := [
-	preload("res://audio/pop-tap-click-fx-383733.mp3"),
-]
+#@onready var sounds := [
+	#preload("res://audio/pop-tap-click-fx-383733.wav"),
+#]
 
 @onready var music_player = %MusicPlayer
 @onready var sound_player = %SoundPlayer
