@@ -169,18 +169,23 @@ unique_name_in_owner = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(1920, 1080)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 script = ExtResource("2_wgmwr")
 
 [node name="BelowTextureRect" type="TextureRect" parent="MixSubViewport"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_tpml5")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_wy8ii")
+expand_mode = 1
 
 [node name="BackBufferCopy2" type="BackBufferCopy" parent="MixSubViewport"]
 copy_mode = 2
@@ -189,21 +194,21 @@ copy_mode = 2
 
 [node name="Beak Blue" type="AnimatedSprite2D" parent="MixSubViewport/Blue Anims"]
 material = SubResource("ShaderMaterial_q2isk")
-position = Vector2(135, 751)
+position = Vector2(397, 702)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4x54s")
 autoplay = "default"
 
 [node name="Claw Blue" type="AnimatedSprite2D" parent="MixSubViewport/Blue Anims"]
 material = SubResource("ShaderMaterial_q2isk")
-position = Vector2(126, 340)
+position = Vector2(388, 388)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_hqgll")
 autoplay = "default"
 
 [node name="Fang Blue" type="AnimatedSprite2D" parent="MixSubViewport/Blue Anims"]
 material = SubResource("ShaderMaterial_q2isk")
-position = Vector2(1737, 733)
+position = Vector2(1485, 698)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kcm50")
 autoplay = "default"
@@ -211,7 +216,7 @@ flip_h = true
 
 [node name="Talon Blue" type="AnimatedSprite2D" parent="MixSubViewport/Blue Anims"]
 material = SubResource("ShaderMaterial_q2isk")
-position = Vector2(1809, 327)
+position = Vector2(1518, 381)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_s6vf6")
 autoplay = "default"
@@ -222,13 +227,16 @@ copy_mode = 2
 [node name="AboveTextureRect" type="TextureRect" parent="MixSubViewport"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_hafda")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("17_kcm50")
+expand_mode = 1
 
 [node name="BackBufferCopy3" type="BackBufferCopy" parent="MixSubViewport"]
 copy_mode = 2
@@ -237,21 +245,21 @@ copy_mode = 2
 
 [node name="Beak Red" type="AnimatedSprite2D" parent="MixSubViewport/Red Anims"]
 material = SubResource("ShaderMaterial_ws2qx")
-position = Vector2(135, 751)
+position = Vector2(397, 702)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_5gw74")
 autoplay = "default"
 
 [node name="Claw Red" type="AnimatedSprite2D" parent="MixSubViewport/Red Anims"]
 material = SubResource("ShaderMaterial_ws2qx")
-position = Vector2(126, 340)
+position = Vector2(388, 388)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_5len6")
 autoplay = "default"
 
 [node name="Fang Red" type="AnimatedSprite2D" parent="MixSubViewport/Red Anims"]
 material = SubResource("ShaderMaterial_ws2qx")
-position = Vector2(1737, 733)
+position = Vector2(1485, 698)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_a41a5")
 autoplay = "default"
@@ -259,7 +267,7 @@ flip_h = true
 
 [node name="Talon Red" type="AnimatedSprite2D" parent="MixSubViewport/Red Anims"]
 material = SubResource("ShaderMaterial_ws2qx")
-position = Vector2(1809, 327)
+position = Vector2(1518, 381)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_tdxtd")
 autoplay = "default"
