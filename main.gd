@@ -1,9 +1,6 @@
 extends Node
 class_name Main
 
-# TODO:
-# Auto-set fullscreen to true if monitor size is selected? (Otherwise clicks pass through to taskbar.)
-
 @onready var title_screen := %TitleScreen
 @onready var pause_menu := %PauseMenu
 @onready var world := %World
