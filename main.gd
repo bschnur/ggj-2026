@@ -3,15 +3,9 @@ class_name Main
 
 # TODO:
 
-# 2. Scale cursor based on window/viewport width/height (relevant todo below).
-# 3. Auto-set fullscreen to true if monitor size is selected? (Otherwise clicks pass through to taskbar.)
-# 4. Resolve fullscreen consistency issue (if checkbox already clear and change to a res
+# 1. Auto-set fullscreen to true if monitor size is selected? (Otherwise clicks pass through to taskbar.)
+# 2. Resolve fullscreen consistency issue (if checkbox already clear and change to a res
 #		smaller than screen, SOMETIMES fullscreen is not applied).
-
-var current_screen_scale := 1.0
-# TODO: also store a scalar representing the current game scale compared to 1080p.
-# This should be used to resize the mouse cursor images - and change the filter radius!
-var os_screen_scale: float
 
 @onready var title_screen := %TitleScreen
 @onready var pause_menu := %PauseMenu
@@ -52,29 +46,21 @@ var _filter_cursor_images: Dictionary[FilterColor, Image]
 
 var filter_color := FilterColor.NONE:
 	set(value):
-		# Todo: the below would probably be better to set on detected display DPI change - but *shrug* it's a 48h jam.
-		if os_screen_scale != current_screen_scale:
-			scale_cursor_images()
 		filter_color = value
-		
 		if filter_color != FilterColor.NONE:
 			var cursor_texture := filter_cursor_textures[filter_color]
 			var hotspot := Vector2.ZERO
-			
 			hotspot = cursor_texture.get_size() * 0.5
 			Input.set_mouse_mode(Settings.hide_mouse_mode)
 			set_software_mouse_cursor(cursor_texture, hotspot, true)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			hide_software_mouse_cursor()
-			#Input.set_custom_mouse_cursor(cursor_img, Input.CURSOR_ARROW, hotspot)
-		
 		RenderingServer.global_shader_parameter_set("mouse_lens_color_id", filter_color)
 
 var stashed_filter_color: FilterColor
 
 func set_software_mouse_cursor(cursor_texture: Texture2D, hotspot: Vector2, show := true) -> void:
-	#var shape := Input.CURSOR_ARROW
 	software_mouse.texture = cursor_texture
 	software_mouse.offset = -hotspot
 	if show:
@@ -86,8 +72,6 @@ func show_software_mouse_cursor() -> void:
 func hide_software_mouse_cursor() -> void:
 	software_mouse.hide()
 
-#var initialization_finished := false
-
 func _ready() -> void:
 	# Disable focus mode on all buttons.
 	# RIP accessibility but game is vision- and mouse-reliant anyhow.
@@ -96,18 +80,12 @@ func _ready() -> void:
 	for b in all_buttons:
 		(b as Button).focus_mode = Control.FOCUS_NONE
 	
-	# Hack to stop scaling cursor by OS resolution scale: pretend the scale is 1.0.
-	#os_screen_scale = DisplayServer.screen_get_max_scale()
-	os_screen_scale = 1.0
-	# This leaves the relevant code available to review for other projects/purposes,
-	# without having to go find an older commit - and is a fast fix.
-	
 	init_cursor_images()
-	scale_cursor_images()
+	Settings.screen_resolution_updated.connect(scale_cursor)
+	scale_cursor()
 	filter_color = FilterColor.RED
 	play_current_music_track()
 	nav_to_title()
-	#initialization_finished = true
 
 const music_starts: Array[float] = [
 	30.0,
@@ -147,19 +125,17 @@ func fade_in():
 	tween.tween_property(music_player, "volume_db", 0.0, music_fade_in_time).set_trans(Tween.TRANS_SINE)
 
 func fade_out_before_end():
-	# 1. Calculate how long to wait before starting the fade
+	# Calculate how long to wait before starting the fade.
 	var current_pos = music_player.get_playback_position()
 	var time_until_fade = (music_ends[current_music_track] - current_pos) - music_fade_out_time
-
-	# 2. If there's time left, wait until the fade-out point
+	# If there's time left, wait until the fade-out point.
 	if time_until_fade > 0:
 		await get_tree().create_timer(time_until_fade).timeout
-
-	# 3. Create the fade-out tween
+	# Create the fade-out tween. Use self.create_tween(), not get_tree().create_tween(),
+	# so that tree paused state doesn't affect it.
 	var tween = create_tween()
 	tween.tween_property(music_player, "volume_db", -80.0, music_fade_out_time)
-
-	# 4. Stop the player once the fade is complete to save resources
+	# Stop the player once the fade is complete to save resources
 	tween.finished.connect(_on_music_track_done)
 
 func _on_music_track_done() -> void:
@@ -190,19 +166,15 @@ func init_cursor_images() -> void:
 		if t is Texture2D:
 			_filter_cursor_images[key] = t.get_image()
 
-func scale_cursor_images() -> void:
-	# TODO: Call this when resolution changes (already calling on _ready)
-	# TODO: incorporate Settings.screen_resolution_scale
-	if current_screen_scale != os_screen_scale:
-		var scale_factor = current_screen_scale / os_screen_scale
-		for img in _filter_cursor_images.values():
-			if img is Image:
-				var new_size: Vector2 = img.get_size() * scale_factor
-				img.resize(new_size.x, new_size.y, Image.INTERPOLATE_BILINEAR)
-		current_screen_scale = os_screen_scale
+func scale_cursor() -> void:
+	if software_mouse.scale != Settings.screen_resolution_scale:
+		software_mouse.scale = Settings.screen_resolution_scale
+		# Update the shader parameter that governs lens spotlight radius.
+		var unscaled_lens_radius := 94.0
+		var scaled_radius_vec := unscaled_lens_radius * Settings.screen_resolution_scale
+		RenderingServer.global_shader_parameter_set("mouse_filtering_radius_vec", scaled_radius_vec)
 
 func _unhandled_input(event: InputEvent) -> void:
-	#if initialization_finished:
 	if event.is_action_pressed("pause"):
 		get_tree().paused = true
 		pause_menu.show()
@@ -210,8 +182,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		world_blend_viewport.update_mouse_pos()
-		# The mouse position within the 0 to size.x/y range of THIS viewport.
-		# It is the "canonical" coordinate for FRAGCOORD.
+		# The mouse position within the 0 to size.x/y range of this viewport.
 		var mouse_pos := (event as InputEventMouseMotion).position
 		# Update the position of the software mouse.
 		software_mouse.position = mouse_pos
@@ -241,18 +212,14 @@ func hide_and_disable(n: Node) -> void:
 	n.process_mode = PROCESS_MODE_DISABLED
 	n.set_process_input(false)
 
-
 func _on_mouse_moved(pos: Vector2) -> void:
 	software_mouse.position = pos
-
 
 func _on_win_screen_dismissed() -> void:
 	nav_to_title()
 
-
 func _on_pause_menu_boop_required() -> void:
 	play_boop()
-
 
 func _on_pause_menu_toggled_resolution_dropdown(toggled_on: bool) -> void:
 	if toggled_on:

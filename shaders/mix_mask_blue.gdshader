@@ -6,7 +6,7 @@ varying vec2 v_screen_pos;
 
 global uniform vec2 mouse_pos;
 global uniform int mouse_lens_color_id;
-global uniform float mouse_filtering_radius;
+global uniform vec2 mouse_filtering_radius_vec;
 
 uniform int color_id = 1;
 
@@ -19,25 +19,25 @@ void vertex() {
 void fragment() {
 	// Check if we are filtering out this color with our spotlight.
 	if (mouse_lens_color_id != color_id) {
-		// Get the distance from the [ostensible] mouse position to this fragment.
-		float dist = distance(v_screen_pos, mouse_pos);
-		// Check whether we are inside the spotlight/circle.
-		if (dist < mouse_filtering_radius) {
+		// Calculate the vector difference and normalize by the elliptical radius
+        vec2 diff = (v_screen_pos - mouse_pos) / mouse_filtering_radius_vec;
+		// Check whether we are inside the (perhaps elliptical) spotlight/circle.
+		if (dot(diff, diff) < 1.0) {
 	        discard; // Don't render this pixel.
 		}
     }
-	
+
 	vec2 v_screen_uv = v_screen_pos * SCREEN_PIXEL_SIZE;
-	
+
 	vec4 base = texture(buffer, v_screen_uv);
-	
+
 	//vec4 blend = texture(TEXTURE, UV);
 	vec4 blend = COLOR;
 	blend.rgb *= blend.a;
-	
+
 	vec4 result;
 	result.rgb = 1.0 - (1.0 - base.rgb) * (1.0 - blend.rgb); // "Screen" formula
 	result.a = 1.0 - (1.0 - blend.a) * (1.0 - base.a); // "Screen" formula
-	
+
 	COLOR = result;
 }

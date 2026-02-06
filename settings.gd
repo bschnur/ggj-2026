@@ -31,9 +31,14 @@ var bus_to_bus_name_map := {
 	AudioBus.VOICE: "Voice",
 }
 
+signal screen_resolution_updated
+
 var fullscreen_enabled := true
 var default_screen_resolution := Vector2i(1920, 1080)
-var screen_resolution := default_screen_resolution
+var screen_resolution := default_screen_resolution:
+	set(value):
+		screen_resolution = value
+		screen_resolution_updated.emit()
 var screen_resolution_string: String:
 	get:
 		return "%dx%d" % [screen_resolution.x, screen_resolution.y]

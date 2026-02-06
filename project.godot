@@ -80,11 +80,11 @@ mouse_pos={
 "type": "vec2",
 "value": Vector2(0, 0)
 }
-mouse_filtering_radius={
-"type": "float",
-"value": 94.0
-}
 mouse_lens_color_id={
 "type": "int",
 "value": 1
+}
+mouse_filtering_radius_vec={
+"type": "vec2",
+"value": Vector2(100, 100)
 }
