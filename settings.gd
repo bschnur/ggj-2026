@@ -119,26 +119,27 @@ func apply_all_audio_volume_settings() -> void:
 		apply_audio_bus_volume_setting(bus)
 
 func apply_display_settings() -> void:
-	var current_window_mode := DisplayServer.window_get_mode()
-	var target_window_mode := DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen_enabled else DisplayServer.WINDOW_MODE_WINDOWED
-	
-	if current_window_mode != target_window_mode:
-		DisplayServer.window_set_mode(target_window_mode)
-		# Wait for the OS to finish the transition
-		await get_tree().process_frame
-	
+	set_window_layout(fullscreen_enabled, screen_resolution)
 	get_window().content_scale_size = screen_resolution
-	
-	if not fullscreen_enabled:
-		DisplayServer.window_set_size(screen_resolution)
-		# Wait for the OS to finish the transition
-		await get_tree().process_frame
-		# Manual Center Calculation - more reliable than move_to_center()
-		var screen := DisplayServer.window_get_current_screen()
-		var screen_rect := DisplayServer.screen_get_usable_rect(screen)
-		var window_size := DisplayServer.window_get_size()
-		var center_pos := screen_rect.position + (screen_rect.size / 2) - (window_size / 2)
-		DisplayServer.window_set_position(center_pos)
+
+func set_window_layout(is_fullscreen: bool, resolution: Vector2i) -> void:
+	if is_fullscreen:
+		# 1. Clear borderless flag first to prevent OS state 'bleeding'
+		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+		# 2. Use WINDOW_MODE_FULLSCREEN (non-exclusive)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		# 1. Force back to Windowed to allow resizing
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		# 2. Explicitly set Borderless flag
+		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
+		# 3. Set Size
+		DisplayServer.window_set_size(resolution)
+		# 4. Center on the usable area of the current screen
+		var screen = DisplayServer.window_get_current_screen()
+		var screen_rect = DisplayServer.screen_get_usable_rect(screen)
+		var window_size = DisplayServer.window_get_size()
+		DisplayServer.window_set_position(screen_rect.position + (Vector2i(screen_rect.size) - window_size) / 2)
 
 func _apply_settings() -> void:
 	apply_all_audio_volume_settings()

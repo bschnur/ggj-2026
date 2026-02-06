@@ -2,10 +2,7 @@ extends Node
 class_name Main
 
 # TODO:
-
-# 1. Auto-set fullscreen to true if monitor size is selected? (Otherwise clicks pass through to taskbar.)
-# 2. Resolve fullscreen consistency issue (if checkbox already clear and change to a res
-#		smaller than screen, SOMETIMES fullscreen is not applied).
+# Auto-set fullscreen to true if monitor size is selected? (Otherwise clicks pass through to taskbar.)
 
 @onready var title_screen := %TitleScreen
 @onready var pause_menu := %PauseMenu
